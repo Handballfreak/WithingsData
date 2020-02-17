@@ -3,10 +3,10 @@ import os
 
 def get_pfad():
     pfad = os.getcwd()
-    #print(pfad)
+    print(type(pfad))
 
 def get_vorlage_pfad():
     pfad = get_pfad()
     pfad=str(pfad)
-    pfad_split = pfad.split("W")
+    pfad_split = pfad.split("\\")
     print(pfad_split)
