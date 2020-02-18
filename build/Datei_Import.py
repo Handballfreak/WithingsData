@@ -31,8 +31,8 @@ def get_dataframe():
     elevation = datei_einlesen("aggregates_elevation.csv")
     steps = datei_einlesen("aggregates_steps.csv")
     sleep = datei_einlesen("sleep.csv")
-    raw_altitude = datei_einlesen("raw_tracker_altidude.csv")
-    raw_calories_earned = datei_einlesen("raw_tracker_calories_earned.csv")
+    raw_altitude = datei_einlesen("raw_tracker_altitude.csv")
+    raw_calories_earned = datei_einlesen("raw_tracker_calories-earned.csv")
     raw_distance = datei_einlesen("raw_tracker_distance.csv")
     raw_elevation = datei_einlesen("raw_tracker_elevation.csv")
     raw_gps_speed = datei_einlesen("raw_tracker_gps-speed.csv")
@@ -40,8 +40,9 @@ def get_dataframe():
     raw_hr = datei_einlesen("raw_tracker_hr.csv")
     raw_lap_pool = datei_einlesen("raw_tracker_lap-pool.csv")
     raw_latitude = datei_einlesen("raw_tracker_latitude.csv")
-    raw_longtitude = datei_einlesen("raw_tracker_longtitude.csv")
+    raw_longtitude = datei_einlesen("raw_tracker_longitude.csv")
     raw_sleep_state = datei_einlesen("raw_tracker_sleep-state.csv")
     raw_steps = datei_einlesen("raw_tracker_steps.csv")
     raw_vertical_radius = datei_einlesen("raw_tracker_vertical-radius.csv")
+    return activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius
 
