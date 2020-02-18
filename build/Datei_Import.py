@@ -16,13 +16,13 @@ def get_vorlage_pfad():
     vorlage_pfad = vorlage_pfad + "\\" + "src\\"
     return vorlage_pfad
 
-#Datei einlesen
+#Datei einlesen Funktion
 def datei_einlesen(dateiname):
     vorlage = get_vorlage_pfad()
     datei = pd.read_csv(vorlage + dateiname)
     return datei
 
-
+#Dateien einlesen
 def get_dataframe():
     activities = datei_einlesen("activities.csv")
     calories_earned = datei_einlesen("aggregates_calories_earned.csv")
