@@ -34,4 +34,7 @@ def show():
     plt.plot(distance.date[::-1],distance.value[::-1])
     ax1.set_xticks(range(len(distance.date)))
     ax1.set_xticklabels(optimize_date(distance.date[::-1]), rotation = 90, fontsize= 7)
+    plt.title("distance in m per day")
+    plt.xlabel("Date")
+    plt.ylabel("distance in m")
     plt.show()
