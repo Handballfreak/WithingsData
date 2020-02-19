@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
 import Datei_Import
+import seaborn as sns
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 
@@ -27,7 +28,7 @@ def optimize_date(date_list):
         complete_date_list.append(complete_date)
     return complete_date_list
 
-#reducing date x ticks
+    #reducing date x ticks
 def date_xtick(date_list):
     date_xtick = []
     date_length = len(date_list)
@@ -42,14 +43,16 @@ def date_xtick(date_list):
     return date_xtick
 
 
-def show():
-    #plt.close("all")
-    #plt.figure(figsize=(40,20)
+def distance_graph():
+    sns.set_context("notebook")
+    sns.set_style("darkgrid")
+    sns.set_palette("dark")
     ax1 = plt.subplot()
-    plt.plot(distance.date[::-1],distance.value[::-1])
+    plt.bar(distance.date[::-1],distance.value[::-1])
     ax1.set_xticks(date_xtick(distance.date[::-1]))
     ax1.set_xticklabels(optimize_date(date_xtick(distance.date[::-1])), rotation = 30, fontsize= 7)
     plt.title("distance in m per day")
     plt.xlabel("Date")
     plt.ylabel("distance in m")
     plt.show()
+

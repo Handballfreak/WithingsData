@@ -1,28 +1,32 @@
 import pandas as pd
 import os
 
-#Path of Main.py
+
+# Path of Main.py
 def get_pfad():
     pfad = os.getcwd()
     return pfad
 
-#get path for sources
+
+# get path for sources
 def get_vorlage_pfad():
     pfad = get_pfad()
     pfad_split = pfad.split("\\")
     vorlage_pfad = pfad_split[0]
-    for i in range(1,len(pfad_split)-1):
+    for i in range(1, len(pfad_split) - 1):
         vorlage_pfad = vorlage_pfad + "\\" + pfad_split[i]
     vorlage_pfad = vorlage_pfad + "\\" + "src\\"
     return vorlage_pfad
 
-#read sources
+
+# read sources
 def datei_einlesen(dateiname):
     vorlage = get_vorlage_pfad()
     datei = pd.read_csv(vorlage + dateiname)
     return datei
 
-#read sources
+
+# read sources
 def get_dataframe():
     activities = datei_einlesen("activities.csv")
     calories_earned = datei_einlesen("aggregates_calories_earned.csv")
@@ -45,4 +49,3 @@ def get_dataframe():
     raw_steps = datei_einlesen("raw_tracker_steps.csv")
     raw_vertical_radius = datei_einlesen("raw_tracker_vertical-radius.csv")
     return activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius
-
