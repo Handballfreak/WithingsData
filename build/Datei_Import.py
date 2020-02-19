@@ -1,12 +1,12 @@
 import pandas as pd
 import os
 
-#Pfad der Main.py abfragen
+#Path of Main.py
 def get_pfad():
     pfad = os.getcwd()
     return pfad
 
-#Vorlage für pfad zur abfrage von Source erstellen
+#get path for sources
 def get_vorlage_pfad():
     pfad = get_pfad()
     pfad_split = pfad.split("\\")
@@ -16,13 +16,13 @@ def get_vorlage_pfad():
     vorlage_pfad = vorlage_pfad + "\\" + "src\\"
     return vorlage_pfad
 
-#Datei einlesen Funktion
+#read sources
 def datei_einlesen(dateiname):
     vorlage = get_vorlage_pfad()
     datei = pd.read_csv(vorlage + dateiname)
     return datei
 
-#Dateien einlesen
+#read sources
 def get_dataframe():
     activities = datei_einlesen("activities.csv")
     calories_earned = datei_einlesen("aggregates_calories_earned.csv")
