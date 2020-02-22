@@ -8,3 +8,4 @@ activities, calories_earned, calories_passive, distance, elevation, steps, sleep
 
 activities = Datei_Import.clean_activities(activities)
 print(activities)
+# print(Datei_Import.help_clean_activities("calories", ["data", "calories":]))

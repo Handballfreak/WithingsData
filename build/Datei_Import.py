@@ -52,16 +52,17 @@ def get_dataframe():
 
 
 def clean_activities(activities):
-    activities['new_Data'] = activities.Data.str.strip("{")
-    activities["new_Data"] = activities.new_Data.str.strip("}")
-    new_Data_split = activities.new_Data.str.split(",")
-    activities["calories"] = help_clean_activities("calories", new_Data_split)
+    # activities['new_Data'] = activities.Data.str.strip("{")
+    # activities["new_Data"] = activities.new_Data.str.strip("}")
+    # new_Data_split = activities.new_Data.str.split(",")
+    # activities["calories"] = help_clean_activities("calories", new_Data_split)
+    activites["calories"] = activities.Data.apply(lambda x: dict(x)["calories"])
     return activities
 
 
-def help_clean_activities(row, split_Data):
-    value = 0
-    for i in range(len(split_Data)):
-        if row in split_Data.str.get(i):
-            value += int(i[len(row)+1:])
-    return value
+# def help_clean_activities(row, split_Data):
+    # value = 0
+    # for i in range(len(split_Data)):
+        # if row in split_Data.str.get(i):
+            # value += int(i[len(row)+1:])
+    # return value
