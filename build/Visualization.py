@@ -63,7 +63,22 @@ def distance_graph():
     plt.show()
 
 
-def step_graph():
+def elevation_graph():
+    sns.set_context("notebook")
+    sns.set_style("darkgrid")
+    sns.set_palette("dark")
+    fig = plt.figure(figsize=(20, 10))
+    ax1 = fig.add_subplot()
+    plt.plot(elevation.date[::-1], elevation.value[::-1])
+    ax1.set_xticks(date_xtick(elevation.date[::-1]))
+    ax1.set_xticklabels(optimize_date(date_xtick(elevation.date[::-1])), rotation=15, fontsize=10)
+    plt.title("elevation in m per day", fontsize=20)
+    plt.xlabel("Date", fontsize=13)
+    plt.ylabel("elevation", fontsize=13)
+    plt.savefig(Datei_Import.get_vorlage_pfad() + "elevation.png")
+    plt.show()
+
+def steps_graph():
     sns.set_context("notebook")
     sns.set_style("darkgrid")
     sns.set_palette("dark")
