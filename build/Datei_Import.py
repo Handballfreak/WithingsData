@@ -52,6 +52,6 @@ def get_dataframe():
 
 
 def clean_activities(activities):
-    activities['new_Data'] = activities.Data.str[1:len(activities.Data)]
+    activities['new_Data'] = activities.Data.str.strip("{")
     activities["new_Data"] = activities.new_Data.str.strip("}")
     return activities
