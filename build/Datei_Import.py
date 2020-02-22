@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import ast
 
 
 # Path of Main.py
@@ -56,15 +57,16 @@ def clean_activities(activities):
     # activities["new_Data"] = activities.new_Data.str.strip("}")
     # new_Data_split = activities.new_Data.str.split(",")
     # activities["calories"] = help_clean_activities("calories", new_Data_split)
-    activites["calories"] = activities.Data.apply(lambda x: key_value_of_dataframe("calories", x))
+    activites["calories"] = activities.Data.apply(lambda x: key_value_of_string("calories", x))
     return activities
 
 def key_value_of_string(key, dictionary):
-    ast.literal_eval(dictionary)
+    print(type(ast.literal_eval(dictionary)))
+    print(ast.literal_eval(dictionary).keys())
     if key in dictionary:
-        return dictionary[key]
-    else:
-        return null
+        print("true "+key)
+        print(ast.literal_eval(dictionary).get(key))
+        return ast.literal_eval(dictionary).get(key)
 
 # def help_clean_activities(row, split_Data):
     # value = 0
