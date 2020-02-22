@@ -56,9 +56,15 @@ def clean_activities(activities):
     # activities["new_Data"] = activities.new_Data.str.strip("}")
     # new_Data_split = activities.new_Data.str.split(",")
     # activities["calories"] = help_clean_activities("calories", new_Data_split)
-    activites["calories"] = activities.Data.apply(lambda x: dict(x)["calories"])
+    activites["calories"] = activities.Data.apply(lambda x: key_value_of_dataframe("calories", x))
     return activities
 
+def key_value_of_string(key, dictionary):
+    ast.literal_eval(dictionary)
+    if key in dictionary:
+        return dictionary[key]
+    else:
+        return null
 
 # def help_clean_activities(row, split_Data):
     # value = 0
