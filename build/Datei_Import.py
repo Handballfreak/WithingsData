@@ -54,6 +54,36 @@ def get_dataframe():
 
 def clean_activities(activities):
     activities["calories"] = activities.Data.apply(lambda x: key_value_of_string("calories", x))
+    activities["device_startdate"] = activities.Data.apply(lambda x: key_value_of_string("device_startdate", x))
+    activities["device_enddate"] = activities.Data.apply(lambda x: key_value_of_string("device_enddate", x))
+    activities["pause_duration"] = activities.Data.apply(lambda x: key_value_of_string("pause_duration", x))
+    activities["steps"] = activities.Data.apply(lambda x: key_value_of_string("steps", x))
+
+    activities["end_coordinate_latitude"] = activities.GPS.apply(
+        lambda x: key_value_of_string("end_coordinate_latitude", x))
+    activities["end_coordinate_longitude"] = activities.GPS.apply(
+        lambda x: key_value_of_string("end_coordinate_longitude", x))
+    activities["region_center_latitude"] = activities.GPS.apply(
+        lambda x: key_value_of_string("region_center_latitude", x))
+    activities["region_center_longitude"] = activities.GPS.apply(
+        lambda x: key_value_of_string("region_center_longitude", x))
+    activities["span_latitude_delta"] = activities.GPS.apply(
+        lambda x: key_value_of_string("span_latitude_delta", x))
+    activities["span_longitude_delta"] = activities.GPS.apply(
+        lambda x: key_value_of_string("span_longitude_delta", x))
+    activities["start_coordinate_latitude"] = activities.GPS.apply(
+        lambda x: key_value_of_string("start_coordinate_latitude", x))
+    activities["start_coordinate_longitude"] = activities.GPS.apply(
+        lambda x: key_value_of_string("start_coordinate_longitude", x))
+    activities["avg_speed"] = activities.GPS.apply(
+        lambda x: key_value_of_string("avg_speed", x))
+    activities["distance"] = activities.GPS.apply(
+        lambda x: key_value_of_string("distance", x))
+    activities["max_speed"] = activities.GPS.apply(
+        lambda x: key_value_of_string("max_speed", x))
+    activities["min_speed"] = activities.GPS.apply(
+        lambda x: key_value_of_string("min_speed", x))
+
     activities["intensity"] = activities.Data.apply(lambda x: key_value_of_string("intensity", x))
     activities["manual_distance"] = activities.Data.apply(lambda x: key_value_of_string("manual_distance", x))
     activities["manual_calories"] = activities.Data.apply(lambda x: key_value_of_string("manual_calories", x))
@@ -80,5 +110,5 @@ def clean_activities(activities):
 
 
 def key_value_of_string(key, dictionary):
-    if key in dictionary:
+    if key in ast.literal_eval(dictionary):
         return ast.literal_eval(dictionary).get(key)
