@@ -54,10 +54,24 @@ def get_dataframe():
 
 def clean_activities(activities):
     activities["calories"] = activities.Data.apply(lambda x: key_value_of_string("calories", x))
-    activities["device_startdate"] = activities.Data.apply(lambda x: key_value_of_string("device_startdate", x))
-    activities["end_startdate"] = activities.Data.apply(lambda x: key_value_of_string("end_startdate", x))
+    activities["intensity"] = activities.Data.apply(lambda x: key_value_of_string("intensity", x))
+    activities["manual_distance"] = activities.Data.apply(lambda x: key_value_of_string("manual_distance", x))
+    activities["manual_calories"] = activities.Data.apply(lambda x: key_value_of_string("manual_calories", x))
+    activities["hr_average"] = activities.Data.apply(lambda x: key_value_of_string("hr_average", x))
+    activities["hr_min"] = activities.Data.apply(lambda x: key_value_of_string("hr_min", x))
+    activities["hr_max"] = activities.Data.apply(lambda x: key_value_of_string("hr_max", x))
+    activities["hr_zone_0"] = activities.Data.apply(lambda x: key_value_of_string("hr_zone_0", x))
+    activities["hr_zone_1"] = activities.Data.apply(lambda x: key_value_of_string("hr_zone_1", x))
+    activities["hr_zone_2"] = activities.Data.apply(lambda x: key_value_of_string("hr_zone_2", x))
+    activities["hr_zone_3"] = activities.Data.apply(lambda x: key_value_of_string("hr_zone_3", x))
     activities["pause_duration"] = activities.Data.apply(lambda x: key_value_of_string("pause_duration", x))
     activities["steps"] = activities.Data.apply(lambda x: key_value_of_string("steps", x))
+    activities["distance"] = activities.Data.apply(lambda x: key_value_of_string("distance", x))
+    activities["elevation"] = activities.Data.apply(lambda x: key_value_of_string("elevation", x))
+    activities["metcumul"] = activities.Data.apply(lambda x: key_value_of_string("metcumul", x))
+    activities["device_startdate"] = activities.Data.apply(lambda x: key_value_of_string("device_startdate", x))
+    activities["device_enddate"] = activities.Data.apply(lambda x: key_value_of_string("device_enddate", x))
+
     return activities
 
 
