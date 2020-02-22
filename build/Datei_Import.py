@@ -71,7 +71,11 @@ def clean_activities(activities):
     activities["metcumul"] = activities.Data.apply(lambda x: key_value_of_string("metcumul", x))
     activities["device_startdate"] = activities.Data.apply(lambda x: key_value_of_string("device_startdate", x))
     activities["device_enddate"] = activities.Data.apply(lambda x: key_value_of_string("device_enddate", x))
-
+    activities["laps"] = activities.Data.apply(lambda x: key_value_of_string("laps", x))
+    activities["mvts"] = activities.Data.apply(lambda x: key_value_of_string("mvts", x))
+    activities["pool_length"] = activities.Data.apply(lambda x: key_value_of_string("pool_length", x))
+    activities["version"] = activities.Data.apply(lambda x: key_value_of_string("version", x))
+    activities["type"] = activities.Data.apply(lambda x: key_value_of_string("type", x))
     return activities
 
 
