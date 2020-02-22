@@ -57,14 +57,13 @@ def clean_activities(activities):
     # activities["new_Data"] = activities.new_Data.str.strip("}")
     # new_Data_split = activities.new_Data.str.split(",")
     # activities["calories"] = help_clean_activities("calories", new_Data_split)
-    activites["calories"] = activities.Data.apply(lambda x: key_value_of_string("calories", x))
+    activities["calories"] = activities.Data.apply(lambda x: key_value_of_string("calories", x))
     return activities
 
 def key_value_of_string(key, dictionary):
     print(type(ast.literal_eval(dictionary)))
     print(ast.literal_eval(dictionary).keys())
     if key in dictionary:
-        print("true "+key)
         print(ast.literal_eval(dictionary).get(key))
         return ast.literal_eval(dictionary).get(key)
 
