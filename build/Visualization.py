@@ -1,6 +1,8 @@
 from matplotlib import pyplot as plt
 import Datei_Import
 import seaborn as sns
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from tkinter import *
 
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
@@ -54,14 +56,14 @@ def distance_graph():
     sns.set_palette("dark")
     fig = plt.figure(figsize=(20, 10), dpi=100)
     ax1 = fig.add_subplot()
-    plt.bar(distance.date[::-1], distance.value[::-1])
+    ax1.bar(distance.date[::-1], distance.value[::-1])
     ax1.set_xticks(date_xtick(distance.date[::-1]))
     ax1.set_xticklabels(optimize_date(date_xtick(distance.date[::-1])), rotation=15, fontsize=10)
     plt.title("distance in m per day", fontsize=20)
     plt.xlabel("Date", fontsize=13)
     plt.ylabel("distance in m", fontsize=13)
-    plt.savefig(Datei_Import.get_vorlage_pfad() + "distance.png")
-    plt.show()
+    # plt.savefig(Datei_Import.get_vorlage_pfad() + "distance.png")
+    return fig
 
 
 def elevation_graph():
@@ -70,7 +72,7 @@ def elevation_graph():
     sns.set_palette("dark")
     fig = plt.figure(figsize=(20, 10))
     ax1 = fig.add_subplot()
-    plt.plot(elevation.date[::-1], elevation.value[::-1])
+    ax1.plot(elevation.date[::-1], elevation.value[::-1])
     ax1.set_xticks(date_xtick(elevation.date[::-1]))
     ax1.set_xticklabels(optimize_date(date_xtick(elevation.date[::-1])), rotation=15, fontsize=10)
     plt.title("elevation in m per day", fontsize=20)
@@ -85,7 +87,7 @@ def steps_graph():
     sns.set_palette("dark")
     fig = plt.figure(figsize=(20, 10))
     ax1 = fig.add_subplot()
-    plt.bar(steps.date[::-1], steps.value[::-1])
+    ax1.bar(steps.date[::-1], steps.value[::-1])
     ax1.set_xticks(date_xtick(steps.date[::-1]))
     ax1.set_xticklabels(optimize_date(date_xtick(steps.date[::-1])), rotation=15, fontsize=10)
     plt.title("steps per day", fontsize=20)

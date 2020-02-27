@@ -2,7 +2,7 @@
 import Datei_Import
 import Visualization
 from tkinter import *
-# from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 # Visualization.distance_graph()
 # Visualization.step_graph()
@@ -11,16 +11,24 @@ from tkinter import *
 
 # activities = Datei_Import.clean_activities(activities)
 # print(activities)
+def distance_click():
+    graph1 = Toplevel()
+    graph1.title("Distance Graph")
+    canvas = FigureCanvasTkAgg(Visualization.distance_graph(), master=graph1)
+    canvas._tkcanvas.grid(row=0, column=0)
+
 
 frame = Tk()
-button_distance = Button(frame,text="distance graph",command=Visualization.distance_graph(),height=5,width=20)
+frame.title("Withings Data Analys Tool")
+frame.geometry("400x400")
+button_distance = Button(frame,text="distance graph",command=distance_click(),height=5,width=20)
 button_distance.grid(row=0,column=0)
 
-button_step = Button(frame,text="steps graph",command=Visualization.steps_graph(),height=5,width=20)
-button_step.grid(row=1,column=0)
+# button_step = Button(frame,text="steps graph",command=steps_click(),height=5,width=20)
+# button_step.grid(row=1,column=0)
 
-button_elevation = Button(frame,text="steps graph",command=Visualization.elevation_graph(),height=5,width=20)
-button_elevation.grid(row=2,column=0)
-
+# button_elevation = Button(frame,text="elevation graph",command=elevation_click(),height=5,width=20)
+# button_elevation.grid(row=2,column=0)
 
 frame.mainloop()
+
