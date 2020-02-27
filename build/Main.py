@@ -14,16 +14,14 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 def distance_click():
     graph1 = Toplevel()
     graph1.title("Distance Graph")
-    label = Label(frame, text="a generic Toplevel window")
-    label.pack()
-    # canvas = FigureCanvasTkAgg(Visualization.distance_graph(), graph1)
-    # canvas._tkcanvas.grid(row=0, column=0)
+    canvas = FigureCanvasTkAgg(Visualization.distance_graph(), graph1)
+    canvas._tkcanvas.grid(row=0, column=0)
 
 
 frame = Tk()
 frame.title("Withings Data Analyse Tool")
 frame.geometry("400x400")
-button_distance = Button(frame,text="distance graph",command=distance_click(),height=5,width=20)
+button_distance = Button(frame,text="distance graph",command=distance_click,height=5,width=20)
 button_distance.grid(row=0,column=0)
 
 # button_step = Button(frame,text="steps graph",command=steps_click(),height=5,width=20)
