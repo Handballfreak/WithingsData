@@ -54,6 +54,7 @@ def get_dataframe():
 
 
 def clean_activities(activities):
+    #Data columns
     activities["calories"] = activities.Data.apply(lambda x: key_value_of_string("calories", x))
     activities["device_startdate"] = activities.Data.apply(lambda x: key_value_of_string("device_startdate", x))
     activities["device_enddate"] = activities.Data.apply(lambda x: key_value_of_string("device_enddate", x))

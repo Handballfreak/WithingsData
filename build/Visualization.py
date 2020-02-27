@@ -2,6 +2,7 @@ from matplotlib import pyplot as plt
 import Datei_Import
 import seaborn as sns
 
+
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
 raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \
 raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
@@ -51,7 +52,7 @@ def distance_graph():
     sns.set_context("notebook")
     sns.set_style("darkgrid")
     sns.set_palette("dark")
-    fig = plt.figure(figsize=(20, 10))
+    fig = plt.figure(figsize=(20, 10), dpi=100)
     ax1 = fig.add_subplot()
     plt.bar(distance.date[::-1], distance.value[::-1])
     ax1.set_xticks(date_xtick(distance.date[::-1]))
