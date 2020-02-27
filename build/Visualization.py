@@ -78,8 +78,8 @@ def elevation_graph():
     plt.title("elevation in m per day", fontsize=20)
     plt.xlabel("Date", fontsize=13)
     plt.ylabel("elevation", fontsize=13)
-    plt.savefig(Datei_Import.get_vorlage_pfad() + "elevation.png")
-    plt.show()
+    # plt.savefig(Datei_Import.get_vorlage_pfad() + "elevation.png")
+    return fig
 
 def steps_graph():
     sns.set_context("notebook")
@@ -93,5 +93,5 @@ def steps_graph():
     plt.title("steps per day", fontsize=20)
     plt.xlabel("Date", fontsize=13)
     plt.ylabel("Steps", fontsize=13)
-    plt.savefig(Datei_Import.get_vorlage_pfad() + "steps.png")
-    plt.show()
+    # plt.savefig(Datei_Import.get_vorlage_pfad() + "steps.png")
+    return fig
