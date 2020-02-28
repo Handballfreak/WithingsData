@@ -36,8 +36,20 @@ def steps_click():
     menubar = Menu(graph1)
     graph1.config(menu=menubar)
     filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Save", menu=filemenu)
-    filemenu.add_command(label="Test", command=save_click)
+    menubar.add_cascade(label="File", menu=filemenu)
+    # In einem Standardpfad speichern
+    filemenu.add_command(label="Save", command=save_click)
+    # Speichern unter festgelegtem Namen und Pfad
+    filemenu.add_command(label="Save as", command=None)
+
+    timeline_menu = Menu(menubar, tearoff= 0)
+    menubar.add_cascade(label="Timeline",menu=timeline_menu)
+    # last 7 days
+    timeline_menu.add_command(label="last week",command = None)
+    #last month
+    timeline_menu.add_command(label="last month", command=None)
+    #last year
+    timeline_menu.add_command(label="last year", command=None)
 # Open Frame with the elevation Graph
 def elevation_click():
     graph1 = Toplevel()
