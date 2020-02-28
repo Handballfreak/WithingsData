@@ -7,13 +7,24 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 # user32 = ctypes.windll.user32
 # screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 # print(screensize)
+def get_standard_path():
+    pfad = Datei_Import.get_pfad()
+    pfad_split = pfad.split("\\")
+    standard_path = pfad_split[0] + "\\"+ pfad_split[1] + "\\"+ pfad_split[2]  + "\\pictures"
+    return standard_path
 
+standard_path = get_standard_path()
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 # print(Datei_Import.get_walking(activities))
+
 
 def save_steps_click():
     frame.filename= filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("png files","*.png")))
     Visualization.save_steps_graph(frame.filename)
+
+
+def standard_save_steps():
+    Visualization.save_steps_graph(standard_path+"\\"+"steps.png")
 
 
 def save_distance_click():
@@ -21,9 +32,17 @@ def save_distance_click():
     Visualization.save_distance_graph(frame.filename)
 
 
+def standard_save_distance():
+    Visualization.save_distance_graph(standard_path+"\\"+"distance.png")
+
+
 def save_elevation_click():
     frame.filename= filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("png files","*.png")))
     Visualization.save_elevation_graph(frame.filename)
+
+
+def standard_save_elevation():
+    Visualization.save_elevation_graph(standard_path+"\\"+"elevation.png")
 
 
 # Open Frame with the Distance Graph
@@ -37,7 +56,7 @@ def distance_click():
     filemenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="File", menu=filemenu)
     # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=None)
+    filemenu.add_command(label="Save", command=standard_save_distance)
     # Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_distance_click)
 
@@ -63,7 +82,7 @@ def steps_click():
     filemenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="File", menu=filemenu)
     # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=None)
+    filemenu.add_command(label="Save", command=standard_save_steps)
     # Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_steps_click)
 
@@ -88,7 +107,7 @@ def elevation_click():
     filemenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="File", menu=filemenu)
     # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=None)
+    filemenu.add_command(label="Save", command=standard_save_elevation)
     # Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_elevation_click)
 
