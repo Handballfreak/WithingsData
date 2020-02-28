@@ -114,7 +114,9 @@ def clean_activities(activities):
 def get_walking(activities):
     activities = clean_activities(activities)
     walking = activities[activities['Activity type']=="Walking"].reset_index()
-    walking = walking[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "manual_distance", "manual_calories", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","distance","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longitude","region_center_latitude","region_center_longitude","span_latitude_delta","span_longitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
+    walking["distance"] = walking["manual_distance"] + walking["distance"]
+    walking["calories"] = walking["manual_calories"] + walking["calories"]
+    walking = walking[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longitude","region_center_latitude","region_center_longitude","span_latitude_delta","span_longitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
     return walking
 
 
