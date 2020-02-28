@@ -3,16 +3,29 @@ import Datei_Import
 import Visualization
 from tkinter import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import ctypes
-user32 = ctypes.windll.user32
-screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-print(screensize)
+# import ctypes
+# user32 = ctypes.windll.user32
+# screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+# print(screensize)
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 # print(Datei_Import.get_walking(activities))
 
-def save_click():
-    print("Test")
+def save_steps_click():
+    frame.filename= filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("png files","*.png")))
+    Visualization.save_steps_graph(frame.filename)
+
+
+def save_distance_click():
+    frame.filename= filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("png files","*.png")))
+    Visualization.save_distance_graph(frame.filename)
+
+
+def save_elevation_click():
+    frame.filename= filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("png files","*.png")))
+    Visualization.save_elevation_graph(frame.filename)
+
+
 # Open Frame with the Distance Graph
 def distance_click():
     graph1 = Toplevel()
@@ -20,10 +33,22 @@ def distance_click():
     canvas = FigureCanvasTkAgg(Visualization.distance_graph(), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
-    graph1.config(menu = menubar)
+    graph1.config(menu=menubar)
     filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Save",menu=filemenu)
-    filemenu.add_command(label="Test",command = save_click)
+    menubar.add_cascade(label="File", menu=filemenu)
+    # In einem Standardpfad speichern
+    filemenu.add_command(label="Save", command=None)
+    # Speichern unter festgelegtem Namen und Pfad
+    filemenu.add_command(label="Save as", command=save_distance_click)
+
+    timeline_menu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="Timeline", menu=timeline_menu)
+    # last 7 days
+    timeline_menu.add_command(label="last week", command=None)
+    # last month
+    timeline_menu.add_command(label="last month", command=None)
+    # last year
+    timeline_menu.add_command(label="last year", command=None)
 
 
 
@@ -38,9 +63,9 @@ def steps_click():
     filemenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="File", menu=filemenu)
     # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=save_click)
+    filemenu.add_command(label="Save", command=None)
     # Speichern unter festgelegtem Namen und Pfad
-    filemenu.add_command(label="Save as", command=None)
+    filemenu.add_command(label="Save as", command=save_steps_click)
 
     timeline_menu = Menu(menubar, tearoff= 0)
     menubar.add_cascade(label="Timeline",menu=timeline_menu)
@@ -50,6 +75,8 @@ def steps_click():
     timeline_menu.add_command(label="last month", command=None)
     #last year
     timeline_menu.add_command(label="last year", command=None)
+
+
 # Open Frame with the elevation Graph
 def elevation_click():
     graph1 = Toplevel()
@@ -59,8 +86,22 @@ def elevation_click():
     menubar = Menu(graph1)
     graph1.config(menu=menubar)
     filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Save", menu=filemenu)
-    filemenu.add_command(label="Test", command=save_click)
+    menubar.add_cascade(label="File", menu=filemenu)
+    # In einem Standardpfad speichern
+    filemenu.add_command(label="Save", command=None)
+    # Speichern unter festgelegtem Namen und Pfad
+    filemenu.add_command(label="Save as", command=save_elevation_click)
+
+    timeline_menu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="Timeline", menu=timeline_menu)
+    # last 7 days
+    timeline_menu.add_command(label="last week", command=None)
+    # last month
+    timeline_menu.add_command(label="last month", command=None)
+    # last year
+    timeline_menu.add_command(label="last year", command=None)
+
+
 # Main frame
 frame = Tk()
 frame.title("Withings Data Analyse Tool")
