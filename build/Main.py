@@ -24,7 +24,10 @@ standard_path_save = get_standard_path_save()
 
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
-# print(Datei_Import.get_walking(activities))
+#clean_activities=Datei_Import.clean_activities(activities)
+#print(clean_activities)
+walking =Datei_Import.get_walking(activities)
+print(walking)
 
 
 def save_steps_click():
