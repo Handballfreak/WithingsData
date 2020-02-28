@@ -114,8 +114,7 @@ def clean_activities(activities):
 def get_walking(activities):
     activities = clean_activities(activities)
     walking = activities[activities['Activity type']=="Walking"].reset_index()
-    # walking = activities["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "manual_distance", "manual_calories", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","distance","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longtitude","region_center_latitude","region_center_longtitude","span_latitude_delta","span_longtitude_delta", 'start_coordinate_latitude',
-       # "start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]
+    # walking = walking["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "manual_distance", "manual_calories", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","distance","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longtitude","region_center_latitude","region_center_longtitude","span_latitude_delta","span_longtitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]
     return walking
 def key_value_of_string(key, dictionary):
     if not pd.isnull(dictionary):
