@@ -1,1 +1,4 @@
 Zusätzliche Dokumentation
+
+Neustart übrgreifende Save Variablenspeicherung (file erstellen und auslesen beim start)
+Namen hochzählen bei Graphen
