@@ -119,6 +119,22 @@ def get_walking(activities):
     walking = walking[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longitude","region_center_latitude","region_center_longitude","span_latitude_delta","span_longitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
     return walking
 
+def get_multisport(activies):
+    activities = clean_activities(activities)
+    multi =  activities[activities['Activity type']=="Multi Sport"].reset_index()
+    multi = multi[["von","bis","from (manual)", "to (manual)", "Timezone","end_coordinate_latitude", "end_coordinate_longitude", "region_center_latitude", "region_center_longitude", "span_latitude_delta", "span_longitude_delta", "start_coordinate_latitude", "start_coordinate_longitude", "avg_speed", "distance", "max_speed", "min_speed"]]
+    return multi
+
+def get_pingpong(activities):
+    activities = clean_activities(activities)
+    pingpong = activities[activities['Activity type'] == "Ping Pong"].reset_index()
+    pingpong["distance"] = pingpong["manual_distance"] + pingpong["distance"]
+    pingpong["calories"] = pingpong["manual_calories"] + pingpong["calories"]
+    pingpong = pingpong[
+        ["von", "bis", "from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average",
+         "hr_min", "hr_max", "hr_zone_0", "hr_zone_1", "hr_zone_2", "hr_zone_3", "pause_duration", "steps", "elevation",
+         "metcumul"]]
+    return pingpong
 
 def key_value_of_string(key, dictionary):
     if not pd.isnull(dictionary):
