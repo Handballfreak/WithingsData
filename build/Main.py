@@ -31,6 +31,7 @@ activities, calories_earned, calories_passive, distance, elevation, steps, sleep
 # print(Datei_Import.get_rowing(activities))
 # print(Datei_Import.get_gym(activities))
 # print(Datei_Import.get_swimming(activities))
+# print(Datei_Import.get_running(activities))
 
 
 def save_steps_click():

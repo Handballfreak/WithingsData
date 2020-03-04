@@ -146,6 +146,15 @@ def get_swimming(activities):
     return swimming
 
 
+def get_running(activities):
+    activities = clean_activities(activities)
+    running = activities[activities['Activity type']=="Running"].reset_index()
+    running["distance"] = running["manual_distance"] + running["distance"]
+    running["calories"] = running["manual_calories"] + running["calories"]
+    running = running[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longitude","region_center_latitude","region_center_longitude","span_latitude_delta","span_longitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
+    return running
+
+
 def key_value_of_string(key, dictionary):
     if not pd.isnull(dictionary):
         if key in dictionary:
