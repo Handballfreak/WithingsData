@@ -34,6 +34,7 @@ activities, calories_earned, calories_passive, distance, elevation, steps, sleep
 # print(Datei_Import.get_gym(activities))
 # print(Datei_Import.get_swimming(activities))
 # print(Datei_Import.get_running(activities))
+# print(Datei_Import.get_calories())
 
 
 def save_steps_click():
@@ -62,6 +63,15 @@ def save_elevation_click():
 
 def standard_save_elevation():
     Visualization.save_elevation_graph(standard_path_save + "\\" + "elevation.png")
+
+
+def save_calories_click():
+    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file", filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
+    Visualization.save_calories_graph(frame.filename)
+
+
+def standard_save_calories():
+    Visualization.save_calories_graph(standard_path_save + "\\" + "calories.png")
 
 
 # Open Frame with the Distance Graph
@@ -140,6 +150,30 @@ def elevation_click():
     timeline_menu.add_command(label="last year", command=None)
 
 
+def calories_click():
+    graph1 = Toplevel()
+    graph1.title("Calories Graph")
+    canvas = FigureCanvasTkAgg(Visualization.calories_graph(), graph1)
+    canvas._tkcanvas.grid(row=1, column=1)
+    menubar = Menu(graph1)
+    graph1.config(menu=menubar)
+    filemenu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="File", menu=filemenu)
+    # In einem Standardpfad speichern
+    filemenu.add_command(label="Save", command=standard_save_calories)
+    # Speichern unter festgelegtem Namen und Pfad
+    filemenu.add_command(label="Save as", command=save_calories_click)
+
+    timeline_menu = Menu(menubar, tearoff= 0)
+    menubar.add_cascade(label="Timeline",menu=timeline_menu)
+    # last 7 days
+    timeline_menu.add_command(label="last week",command = None)
+    #last month
+    timeline_menu.add_command(label="last month", command=None)
+    #last year
+    timeline_menu.add_command(label="last year", command=None)
+
+
 # Main frame
 frame = Tk()
 frame.title("Withings Data Analyse Tool")
@@ -156,6 +190,11 @@ button_step.grid(row=1, column=0)
 # button to produce elevation graph
 button_elevation = Button(frame, text="elevation graph", command=elevation_click, height=5, width=20)
 button_elevation.grid(row=2, column=0)
+
+
+button_calories = Button(frame, text="calories graph", command=calories_click, height=5, width=20)
+button_calories.grid(row=3, column=0)
+
 
 #button to set standard save directory
 button_standard_save = Button(frame, text="Set Standard Save-Directory", command=set_standard_save_path, height=5, width=20)

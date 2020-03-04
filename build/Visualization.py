@@ -9,6 +9,7 @@ activities, calories_earned, calories_passive, distance, elevation, steps, sleep
 raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \
 raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 activities = Datei_Import.clean_activities(activities)
+calories = Datei_Import.get_calories()
 
 
 # numbers to Month names
@@ -108,4 +109,24 @@ def steps_graph():
 
 def save_steps_graph(path):
     steps_graph()
+    plt.savefig(path)
+
+
+def calories_graph():
+    sns.set_context("notebook")
+    sns.set_style("darkgrid")
+    sns.set_palette("dark")
+    fig = plt.figure(figsize=(16, 7))
+    ax1 = fig.add_subplot()
+    ax1.plot(calories.date[::-1], calories.value[::-1])
+    ax1.set_xticks(date_xtick(calories.date[::-1]))
+    ax1.set_xticklabels(optimize_date(date_xtick(calories.date[::-1])), rotation=15, fontsize=10)
+    plt.title("Calories burned per day", fontsize=20)
+    plt.xlabel("Date", fontsize=13)
+    plt.ylabel("Calories", fontsize=13)
+    return fig
+
+
+def save_calories_graph(path):
+    calories_graph()
     plt.savefig(path)

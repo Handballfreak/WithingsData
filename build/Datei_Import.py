@@ -174,6 +174,15 @@ def get_running(activities):
     return running
 
 
+def get_calories():
+    activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
+    raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \
+    raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = get_dataframe()
+    calories = calories_earned[["date"]]
+    calories["value"]=calories_earned["value"] + calories_passive["value"]
+    return calories
+
+
 def key_value_of_string(key, dictionary):
     if not pd.isnull(dictionary):
         if key in dictionary:
