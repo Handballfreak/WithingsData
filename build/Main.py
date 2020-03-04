@@ -16,10 +16,12 @@ def get_standard_path_save():
     standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
     return standard_path_save
 
+
 def set_standard_save_path():
     global standard_path_save
     standard_path_save=filedialog.askdirectory()
     print(standard_path_save)
+
 
 standard_path_save = get_standard_path_save()
 
