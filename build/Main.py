@@ -4,6 +4,8 @@ import Visualization
 from tkinter import *
 from tkinter import filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
+
 # import ctypes
 # user32 = ctypes.windll.user32
 # screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
@@ -19,12 +21,11 @@ def get_standard_path_save():
 
 def set_standard_save_path():
     global standard_path_save
-    standard_path_save=filedialog.askdirectory()
+    standard_path_save = filedialog.askdirectory()
     print(standard_path_save)
 
 
 standard_path_save = get_standard_path_save()
-
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 
@@ -38,7 +39,8 @@ activities, calories_earned, calories_passive, distance, elevation, steps, sleep
 
 
 def save_steps_click():
-    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file", filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
+    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
+                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
     Visualization.save_steps_graph(frame.filename)
 
 
@@ -48,7 +50,8 @@ def standard_save_steps():
 
 
 def save_distance_click():
-    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file", filetypes=(("jpeg files","*.jpg"), ("png files", "*.png")))
+    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
+                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
     Visualization.save_distance_graph(frame.filename)
 
 
@@ -57,7 +60,8 @@ def standard_save_distance():
 
 
 def save_elevation_click():
-    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file", filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
+    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
+                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
     Visualization.save_elevation_graph(frame.filename)
 
 
@@ -66,7 +70,8 @@ def standard_save_elevation():
 
 
 def save_calories_click():
-    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file", filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
+    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
+                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
     Visualization.save_calories_graph(frame.filename)
 
 
@@ -99,7 +104,6 @@ def distance_click():
     timeline_menu.add_command(label="last year", command=None)
 
 
-
 # Open Frame with the Steps Graph
 def steps_click():
     graph1 = Toplevel()
@@ -115,13 +119,13 @@ def steps_click():
     # Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_steps_click)
 
-    timeline_menu = Menu(menubar, tearoff= 0)
-    menubar.add_cascade(label="Timeline",menu=timeline_menu)
+    timeline_menu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="Timeline", menu=timeline_menu)
     # last 7 days
-    timeline_menu.add_command(label="last week",command = None)
-    #last month
+    timeline_menu.add_command(label="last week", command=None)
+    # last month
     timeline_menu.add_command(label="last month", command=None)
-    #last year
+    # last year
     timeline_menu.add_command(label="last year", command=None)
 
 
@@ -164,13 +168,13 @@ def calories_click():
     # Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_calories_click)
 
-    timeline_menu = Menu(menubar, tearoff= 0)
-    menubar.add_cascade(label="Timeline",menu=timeline_menu)
+    timeline_menu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="Timeline", menu=timeline_menu)
     # last 7 days
-    timeline_menu.add_command(label="last week",command = None)
-    #last month
+    timeline_menu.add_command(label="last week", command=None)
+    # last month
     timeline_menu.add_command(label="last month", command=None)
-    #last year
+    # last year
     timeline_menu.add_command(label="last year", command=None)
 
 
@@ -191,13 +195,11 @@ button_step.grid(row=1, column=0)
 button_elevation = Button(frame, text="elevation graph", command=elevation_click, height=5, width=20)
 button_elevation.grid(row=2, column=0)
 
-
 button_calories = Button(frame, text="calories graph", command=calories_click, height=5, width=20)
 button_calories.grid(row=3, column=0)
 
-
-#button to set standard save directory
-button_standard_save = Button(frame, text="Set Standard Save-Directory", command=set_standard_save_path, height=5, width=20)
+# button to set standard save directory
+button_standard_save = Button(frame, text="Set Standard Save-Directory", command=set_standard_save_path, height=5,
+                              width=20)
 button_standard_save.grid(row=0, column=1)
 frame.mainloop()
-

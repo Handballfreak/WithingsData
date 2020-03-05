@@ -50,11 +50,13 @@ def get_dataframe():
     raw_sleep_state = datei_einlesen("raw_tracker_sleep-state.csv")
     raw_steps = datei_einlesen("raw_tracker_steps.csv")
     raw_vertical_radius = datei_einlesen("raw_tracker_vertical-radius.csv")
-    return activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius
+    return activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
+           raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \
+           raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius
 
 
 def clean_activities(activities):
-    #Data columns
+    # Data columns
     activities["calories"] = activities.Data.apply(lambda x: key_value_of_string("calories", x))
     activities["device_startdate"] = activities.Data.apply(lambda x: key_value_of_string("device_startdate", x))
     activities["device_enddate"] = activities.Data.apply(lambda x: key_value_of_string("device_enddate", x))
@@ -83,7 +85,7 @@ def clean_activities(activities):
     activities["version"] = activities.Data.apply(lambda x: key_value_of_string("version", x))
     activities["type"] = activities.Data.apply(lambda x: key_value_of_string("type", x))
 
-    #GPS columns
+    # GPS columns
     activities["end_coordinate_latitude"] = activities.GPS.apply(
         lambda x: key_value_of_string("end_coordinate_latitude", x))
     activities["end_coordinate_longitude"] = activities.GPS.apply(
@@ -114,17 +116,25 @@ def clean_activities(activities):
 
 def get_walking(activities):
     activities = clean_activities(activities)
-    walking = activities[activities['Activity type']=="Walking"].reset_index()
+    walking = activities[activities['Activity type'] == "Walking"].reset_index()
     walking["distance"] = walking["manual_distance"] + walking["distance"]
     walking["calories"] = walking["manual_calories"] + walking["calories"]
-    walking = walking[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longitude","region_center_latitude","region_center_longitude","span_latitude_delta","span_longitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
+    walking = walking[
+        ["von", "bis", "from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average",
+         "hr_min", "hr_max", "hr_zone_0", "hr_zone_1", "hr_zone_2", "hr_zone_3", "pause_duration", "steps", "elevation",
+         "metcumul", "device_startdate", "device_enddate", "end_coordinate_latitude", "end_coordinate_longitude",
+         "region_center_latitude", "region_center_longitude", "span_latitude_delta", "span_longitude_delta",
+         'start_coordinate_latitude', "start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
     return walking
 
 
 def get_multisport(activities):
     activities = clean_activities(activities)
-    multi =  activities[activities['Activity type']=="Multi Sport"].reset_index()
-    multi = multi[["von","bis","from (manual)", "to (manual)", "Timezone","end_coordinate_latitude", "end_coordinate_longitude", "region_center_latitude", "region_center_longitude", "span_latitude_delta", "span_longitude_delta", "start_coordinate_latitude", "start_coordinate_longitude", "avg_speed", "distance", "max_speed", "min_speed"]]
+    multi = activities[activities['Activity type'] == "Multi Sport"].reset_index()
+    multi = multi[["von", "bis", "from (manual)", "to (manual)", "Timezone", "end_coordinate_latitude",
+                   "end_coordinate_longitude", "region_center_latitude", "region_center_longitude",
+                   "span_latitude_delta", "span_longitude_delta", "start_coordinate_latitude",
+                   "start_coordinate_longitude", "avg_speed", "distance", "max_speed", "min_speed"]]
     return multi
 
 
@@ -142,35 +152,53 @@ def get_pingpong(activities):
 
 def get_rowing(activities):
     activities = clean_activities(activities)
-    rowing = activities[activities['Activity type']=="Rowing"].reset_index()
+    rowing = activities[activities['Activity type'] == "Rowing"].reset_index()
     rowing["distance"] = rowing["manual_distance"] + rowing["distance"]
     rowing["calories"] = rowing["manual_calories"] + rowing["calories"]
-    rowing = rowing[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longitude","region_center_latitude","region_center_longitude","span_latitude_delta","span_longitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
+    rowing = rowing[
+        ["von", "bis", "from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average",
+         "hr_min", "hr_max", "hr_zone_0", "hr_zone_1", "hr_zone_2", "hr_zone_3", "pause_duration", "steps", "elevation",
+         "metcumul", "device_startdate", "device_enddate", "end_coordinate_latitude", "end_coordinate_longitude",
+         "region_center_latitude", "region_center_longitude", "span_latitude_delta", "span_longitude_delta",
+         'start_coordinate_latitude', "start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
     return rowing
 
 
 def get_gym(activities):
     activities = clean_activities(activities)
-    gym = activities[activities['Activity type']=="Gym class"].reset_index()
+    gym = activities[activities['Activity type'] == "Gym class"].reset_index()
     gym["distance"] = gym["manual_distance"] + gym["distance"]
     gym["calories"] = gym["manual_calories"] + gym["calories"]
-    gym = gym[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longitude","region_center_latitude","region_center_longitude","span_latitude_delta","span_longitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
+    gym = gym[
+        ["von", "bis", "from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average",
+         "hr_min", "hr_max", "hr_zone_0", "hr_zone_1", "hr_zone_2", "hr_zone_3", "pause_duration", "steps", "elevation",
+         "metcumul", "device_startdate", "device_enddate", "end_coordinate_latitude", "end_coordinate_longitude",
+         "region_center_latitude", "region_center_longitude", "span_latitude_delta", "span_longitude_delta",
+         'start_coordinate_latitude', "start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
     return gym
 
 
 def get_swimming(activities):
     activities = clean_activities(activities)
-    swimming = activities[activities['Activity type']=="Swimming"].reset_index()
-    swimming = swimming[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "hr_average", "hr_min", "hr_max", "hr_zone_0", "hr_zone_1", "hr_zone_2", "hr_zone_3", "pause_duration", "device_startdate", "device_enddate", "laps", "mvts", "pool_length", "version", "type"]]
+    swimming = activities[activities['Activity type'] == "Swimming"].reset_index()
+    swimming = swimming[
+        ["von", "bis", "from (manual)", "to (manual)", "Timezone", "calories", "hr_average", "hr_min", "hr_max",
+         "hr_zone_0", "hr_zone_1", "hr_zone_2", "hr_zone_3", "pause_duration", "device_startdate", "device_enddate",
+         "laps", "mvts", "pool_length", "version", "type"]]
     return swimming
 
 
 def get_running(activities):
     activities = clean_activities(activities)
-    running = activities[activities['Activity type']=="Running"].reset_index()
+    running = activities[activities['Activity type'] == "Running"].reset_index()
     running["distance"] = running["manual_distance"] + running["distance"]
     running["calories"] = running["manual_calories"] + running["calories"]
-    running = running[["von","bis","from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average","hr_min","hr_max","hr_zone_0","hr_zone_1","hr_zone_2","hr_zone_3","pause_duration","steps","elevation","metcumul","device_startdate","device_enddate","end_coordinate_latitude","end_coordinate_longitude","region_center_latitude","region_center_longitude","span_latitude_delta","span_longitude_delta", 'start_coordinate_latitude',"start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
+    running = running[
+        ["von", "bis", "from (manual)", "to (manual)", "Timezone", "calories", "intensity", "distance", "hr_average",
+         "hr_min", "hr_max", "hr_zone_0", "hr_zone_1", "hr_zone_2", "hr_zone_3", "pause_duration", "steps", "elevation",
+         "metcumul", "device_startdate", "device_enddate", "end_coordinate_latitude", "end_coordinate_longitude",
+         "region_center_latitude", "region_center_longitude", "span_latitude_delta", "span_longitude_delta",
+         'start_coordinate_latitude', "start_coordinate_longitude", "avg_speed", "max_speed", "min_speed"]]
     return running
 
 
@@ -179,7 +207,7 @@ def get_calories():
     raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \
     raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, raw_vertical_radius = get_dataframe()
     calories = calories_earned[["date"]]
-    calories["value"]=calories_earned["value"] + calories_passive["value"]
+    calories["value"] = calories_earned["value"] + calories_passive["value"]
     return calories
 
 
