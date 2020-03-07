@@ -1,4 +1,5 @@
 # import pandas as pd
+from datetime import datetime
 import Datei_Import
 import Visualization
 from tkinter import *
@@ -48,7 +49,8 @@ def save_steps_click():
 
 def standard_save_steps():
     print(standard_path_save)
-    Visualization.save_steps_graph(standard_path_save + "\\" + "steps.png")
+    timestamp=datetime.now().strftime("%m-%d-%Y-%H-%M")
+    Visualization.save_steps_graph(standard_path_save + "\\" + "steps"+timestamp+".png")
 
 
 def save_distance_click():
@@ -58,7 +60,8 @@ def save_distance_click():
 
 
 def standard_save_distance():
-    Visualization.save_distance_graph(standard_path_save + "\\" + "distance.png")
+    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
+    Visualization.save_distance_graph(standard_path_save + "\\" + "distance"+timestamp+".png")
 
 
 def save_elevation_click():
@@ -68,7 +71,8 @@ def save_elevation_click():
 
 
 def standard_save_elevation():
-    Visualization.save_elevation_graph(standard_path_save + "\\" + "elevation.png")
+    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
+    Visualization.save_elevation_graph(standard_path_save + "\\" + "elevation"+timestamp+".png")
 
 
 def save_calories_click():
@@ -78,7 +82,8 @@ def save_calories_click():
 
 
 def standard_save_calories():
-    Visualization.save_calories_graph(standard_path_save + "\\" + "calories.png")
+    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
+    Visualization.save_calories_graph(standard_path_save + "\\" + "calories"+timestamp+".png")
 
 
 # Open Frame with the Distance Graph
