@@ -6,27 +6,36 @@ from tkinter import *
 from tkinter import filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-
+read_path=Datei_Import.get_vorlage_pfad()
 # import ctypes
 # user32 = ctypes.windll.user32
 # screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 # print(screensize)
 
 
-def get_standard_path_save():
-    pfad = Datei_Import.get_pfad()
-    pfad_split = pfad.split("\\")
-    standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
-    return standard_path_save
+# def get_standard_path_save():
+    # pfad = Datei_Import.get_pfad()
+    # pfad_split = pfad.split("\\")
+    # standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
+    # return standard_path_save
 
 
 def set_standard_save_path():
     global standard_path_save
     standard_path_save = filedialog.askdirectory()
-    print(standard_path_save)
+    var_file=open(read_path+"var.txt","w")
+    var_file.write("Standard Save:"+standard_path_save)
+    # print(standard_path_save)
 
 
-standard_path_save = get_standard_path_save()
+standard_path_save = ""
+var_file=open(read_path+"var.txt","r")
+line=var_file.readline()
+split_first_line=line.split(":")[1:]
+standard_path_save+=split_first_line[0]+":"
+for i in range(1,len(split_first_line)):
+    standard_path_save+=split_first_line[i]
+
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned,\
 raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude,\
