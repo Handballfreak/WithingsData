@@ -199,3 +199,17 @@ def calories_graph():
 def save_calories_graph(path):
     calories_graph()
     plt.savefig(path)
+
+def activities_pie():
+    lst, time = Datei_Import.get_time_activities(activities)
+    activity_labels = ["Walking","Multisport","PingPong","Rowing","Gym","Swimming","Running"]
+    activity_count = []
+    activity_count.append(lst.count("Walking"))
+    activity_count.append(lst.count("Multi Sport"))
+    activity_count.append(lst.count("Ping Pong"))
+    activity_count.append(lst.count("Rowing"))
+    activity_count.append(lst.count("Gym class"))
+    activity_count.append(lst.count("Swimming"))
+    activity_count.append(lst.count("Running"))
+    plt.pie(activity_count, labels=activity_labels, autopct="%1.1f%%")
+    plt.show()
