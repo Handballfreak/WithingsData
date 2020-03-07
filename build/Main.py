@@ -117,12 +117,35 @@ def distance_click():
     timeline_menu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="Timeline", menu=timeline_menu)
     # last 7 days
-    timeline_menu.add_command(label="last week", command=None)
+    timeline_menu.add_command(label="last week", command=last_week_click)
     # last month
     timeline_menu.add_command(label="last month", command=None)
     # last year
     timeline_menu.add_command(label="last year", command=None)
 
+def last_week_click():
+    graph1 = Toplevel()
+    graph1.title("Distance Graph")
+    timerange = null
+    canvas = FigureCanvasTkAgg(Visualization.distance_graph("last week"), graph1)
+    canvas._tkcanvas.grid(row=1, column=1)
+    menubar = Menu(graph1)
+    graph1.config(menu=menubar)
+    filemenu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="File", menu=filemenu)
+    # In einem Standardpfad speichern
+    filemenu.add_command(label="Save", command=standard_save_distance)
+    # Speichern unter festgelegtem Namen und Pfad
+    filemenu.add_command(label="Save as", command=save_distance_click)
+
+    timeline_menu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="Timeline", menu=timeline_menu)
+    # last 7 days
+    timeline_menu.add_command(label="last week", command=last_week_click)
+    # last month
+    timeline_menu.add_command(label="last month", command=None)
+    # last year
+    timeline_menu.add_command(label="last year", command=None)
 
 # Open Frame with the Steps Graph
 def steps_click():
