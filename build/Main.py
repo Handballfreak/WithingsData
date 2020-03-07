@@ -6,7 +6,9 @@ from tkinter import *
 from tkinter import filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-read_path=Datei_Import.get_vorlage_pfad()
+read_path = Datei_Import.get_vorlage_pfad()
+
+
 # import ctypes
 # user32 = ctypes.windll.user32
 # screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
@@ -14,33 +16,31 @@ read_path=Datei_Import.get_vorlage_pfad()
 
 
 # def get_standard_path_save():
-    # pfad = Datei_Import.get_pfad()
-    # pfad_split = pfad.split("\\")
-    # standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
-    # return standard_path_save
+# pfad = Datei_Import.get_pfad()
+# pfad_split = pfad.split("\\")
+# standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
+# return standard_path_save
 
 
 def set_standard_save_path():
     global standard_path_save
     standard_path_save = filedialog.askdirectory()
-    var_file=open(read_path+"var.txt","w")
-    var_file.write("Standard Save:"+standard_path_save)
+    var_file = open(read_path + "var.txt", "w")
+    var_file.write("Standard Save:" + standard_path_save)
     # print(standard_path_save)
 
 
 standard_path_save = ""
-var_file=open(read_path+"var.txt","r")
-line=var_file.readline()
-split_first_line=line.split(":")[1:]
-standard_path_save+=split_first_line[0]+":"
-for i in range(1,len(split_first_line)):
-    standard_path_save+=split_first_line[i]
+var_file = open(read_path + "var.txt", "r")
+line = var_file.readline()
+split_first_line = line.split(":")[1:]
+standard_path_save += split_first_line[0] + ":"
+for i in range(1, len(split_first_line)):
+    standard_path_save += split_first_line[i]
 
-
-activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned,\
-raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude,\
+activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, \
+raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, \
 raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
-
 
 # print(Datei_Import.get_walking(activities))
 # print(Datei_Import.get_rowing(activities))
@@ -48,8 +48,11 @@ raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 # print(Datei_Import.get_swimming(activities))
 # print(Datei_Import.get_running(activities))
 # print(Datei_Import.get_calories())
-time=Datei_Import.get_time_activities(activities)
+lst, time = Datei_Import.get_time_activities(activities)
+print(len(lst))
 print(time)
+Visualization.activities_pie()
+
 
 def save_steps_click():
     frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
@@ -59,8 +62,8 @@ def save_steps_click():
 
 def standard_save_steps():
     print(standard_path_save)
-    timestamp=datetime.now().strftime("%m-%d-%Y-%H-%M")
-    Visualization.save_steps_graph(standard_path_save + "\\" + "steps"+timestamp+".png")
+    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
+    Visualization.save_steps_graph(standard_path_save + "\\" + "steps" + timestamp + ".png")
 
 
 def save_distance_click():
@@ -71,7 +74,7 @@ def save_distance_click():
 
 def standard_save_distance():
     timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
-    Visualization.save_distance_graph(standard_path_save + "\\" + "distance"+timestamp+".png")
+    Visualization.save_distance_graph(standard_path_save + "\\" + "distance" + timestamp + ".png")
 
 
 def save_elevation_click():
@@ -82,7 +85,7 @@ def save_elevation_click():
 
 def standard_save_elevation():
     timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
-    Visualization.save_elevation_graph(standard_path_save + "\\" + "elevation"+timestamp+".png")
+    Visualization.save_elevation_graph(standard_path_save + "\\" + "elevation" + timestamp + ".png")
 
 
 def save_calories_click():
@@ -93,7 +96,7 @@ def save_calories_click():
 
 def standard_save_calories():
     timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
-    Visualization.save_calories_graph(standard_path_save + "\\" + "calories"+timestamp+".png")
+    Visualization.save_calories_graph(standard_path_save + "\\" + "calories" + timestamp + ".png")
 
 
 # Open Frame with the Distance Graph

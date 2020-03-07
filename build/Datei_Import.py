@@ -220,10 +220,22 @@ def key_value_of_string(key, dictionary):
 def get_time_activities(activities):
     activities = clean_activities(activities)
     time = activities[["von", "bis", "from (manual)", "to (manual)", "Activity type"]]
-    time["von"] = time.apply(lambda x: x["from (manual)"] if pd.notnull(x["from (manual)"]) else x["von"],axis =1)
-    time["bis"] = time.apply(lambda x: x["to(manual)"] if pd.notnull(x["to (manual)"]) else x["bis"],axis =1)
+    time["von"] = time.apply(lambda x: x["from (manual)"] if pd.notnull(x["from (manual)"]) else x["von"], axis=1)
+    time["bis"] = time.apply(lambda x: x["to(manual)"] if pd.notnull(x["to (manual)"]) else x["bis"], axis=1)
     time["von"] = pd.to_datetime(time["von"])
     time["bis"] = pd.to_datetime(time["bis"])
-    time=time[["von", "bis","Activity type"]]
-    time["span"]=time["bis"]-time["von"]
-    return time
+    time = time[["von", "bis", "Activity type"]]
+    time["span"] = time["bis"] - time["von"]
+    lst_activities_pro_min=[]
+    lst_activities_pro_min=time.apply(lambda x: add_lst(x["span"], lst_activities_pro_min, x["Activity type"]),axis=1)
+    concat_lst=[]
+    for n in range(len(lst_activities_pro_min)):
+        concat_lst=concat_lst+lst_activities_pro_min[n]
+    return concat_lst, time
+
+
+def add_lst(i, lst, activity):
+    i=(i.seconds)%60
+    for x in range(i):
+        lst.append(activity)
+    return lst
