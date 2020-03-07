@@ -223,15 +223,6 @@ def activities_click():
     # Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_activities_click)
 
-    timeline_menu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Timeline", menu=timeline_menu)
-    # last 7 days
-    timeline_menu.add_command(label="last week", command=None)
-    # last month
-    timeline_menu.add_command(label="last month", command=None)
-    # last year
-    timeline_menu.add_command(label="last year", command=None)
-
 
 # Main frame
 frame = Tk()
