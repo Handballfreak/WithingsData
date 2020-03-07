@@ -48,7 +48,8 @@ raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 # print(Datei_Import.get_swimming(activities))
 # print(Datei_Import.get_running(activities))
 # print(Datei_Import.get_calories())
-
+time=Datei_Import.get_time_activities(activities)
+print(time)
 
 def save_steps_click():
     frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",

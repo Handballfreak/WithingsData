@@ -215,3 +215,15 @@ def key_value_of_string(key, dictionary):
     if not pd.isnull(dictionary):
         if key in dictionary:
             return ast.literal_eval(dictionary).get(key)
+
+
+def get_time_activities(activities):
+    activities = clean_activities(activities)
+    time = activities[["von", "bis", "from (manual)", "to (manual)", "Activity type"]]
+    time["von"] = time.apply(lambda x: x["from (manual)"] if pd.notnull(x["from (manual)"]) else x["von"],axis =1)
+    time["bis"] = time.apply(lambda x: x["to(manual)"] if pd.notnull(x["to (manual)"]) else x["bis"],axis =1)
+    time["von"] = pd.to_datetime(time["von"])
+    time["bis"] = pd.to_datetime(time["bis"])
+    time=time[["von", "bis","Activity type"]]
+    time["span"]=time["bis"]-time["von"]
+    return time
