@@ -227,7 +227,6 @@ def get_time_activities(activities):
     time["bis"] = pd.to_datetime(time["bis"])
     time = time[["von", "bis", "Activity type"]]
     time["span"] = time["bis"] - time["von"]
-    time["span"] = time.apply(lambda x: x["span"]+dt.timedelta(hours=4) if x["Activity type"]=="Ping Pong" else x["span"],axis =1)
     lst_activities_pro_min = []
     lst_activities_pro_min = time.apply(lambda x: add_lst(x["span"], lst_activities_pro_min, x["Activity type"]),
                                         axis=1)
@@ -238,7 +237,7 @@ def get_time_activities(activities):
 
 
 def add_lst(i, lst, activity):
-    i = (i.seconds//60) % 60
+    i = (i.seconds//60)
     for x in range(i):
         lst.append(activity)
     return lst
