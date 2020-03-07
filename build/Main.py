@@ -11,7 +11,7 @@ read_path=Datei_Import.get_vorlage_pfad()
 # user32 = ctypes.windll.user32
 # screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 # print(screensize)
-
+from datetime import date
 
 # def get_standard_path_save():
     # pfad = Datei_Import.get_pfad()
@@ -99,7 +99,7 @@ def standard_save_calories():
 def distance_click():
     graph1 = Toplevel()
     graph1.title("Distance Graph")
-    canvas = FigureCanvasTkAgg(Visualization.distance_graph(), graph1)
+    canvas = FigureCanvasTkAgg(Visualization.distance_graph(null), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
     graph1.config(menu=menubar)
@@ -143,6 +143,8 @@ def steps_click():
     timeline_menu.add_command(label="last month", command=None)
     # last year
     timeline_menu.add_command(label="last year", command=None)
+
+
 
 
 # Open Frame with the elevation Graph
