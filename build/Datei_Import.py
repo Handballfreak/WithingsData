@@ -237,7 +237,7 @@ def get_time_activities(activities):
 
 
 def add_lst(i, lst, activity):
-    i = (i.seconds//60)
+    i = (i.seconds // 60)
     for x in range(i):
         lst.append(activity)
     return lst

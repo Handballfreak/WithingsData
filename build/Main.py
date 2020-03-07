@@ -77,6 +77,17 @@ def standard_save_distance():
     Visualization.save_distance_graph(standard_path_save + "\\" + "distance" + timestamp + ".png")
 
 
+def save_activities_click():
+    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
+                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
+    Visualization.save_activities_graph(frame.filename)
+
+
+def standard_save_activities():
+    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
+    Visualization.save_activities_graph(standard_path_save + "\\" + "activities" + timestamp + ".png")
+
+
 def save_elevation_click():
     frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
                                                   filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
@@ -198,10 +209,34 @@ def calories_click():
     timeline_menu.add_command(label="last year", command=None)
 
 
+def activities_click():
+    graph1 = Toplevel()
+    graph1.title("Activities Graph")
+    canvas = FigureCanvasTkAgg(Visualization.activities_pie(), graph1)
+    canvas._tkcanvas.grid(row=1, column=1)
+    menubar = Menu(graph1)
+    graph1.config(menu=menubar)
+    filemenu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="File", menu=filemenu)
+    # In einem Standardpfad speichern
+    filemenu.add_command(label="Save", command=standard_save_activities)
+    # Speichern unter festgelegtem Namen und Pfad
+    filemenu.add_command(label="Save as", command=save_activities_click)
+
+    timeline_menu = Menu(menubar, tearoff=0)
+    menubar.add_cascade(label="Timeline", menu=timeline_menu)
+    # last 7 days
+    timeline_menu.add_command(label="last week", command=None)
+    # last month
+    timeline_menu.add_command(label="last month", command=None)
+    # last year
+    timeline_menu.add_command(label="last year", command=None)
+
+
 # Main frame
 frame = Tk()
 frame.title("Withings Data Analyse Tool")
-frame.geometry("400x400")
+frame.geometry("600x600")
 
 # button to produce distance graph
 button_distance = Button(frame, text="distance graph", command=distance_click, height=5, width=20)
@@ -217,6 +252,9 @@ button_elevation.grid(row=2, column=0)
 
 button_calories = Button(frame, text="calories graph", command=calories_click, height=5, width=20)
 button_calories.grid(row=3, column=0)
+
+button_activities = Button(frame, text="Activities graph", command=activities_click, height=5, width=20)
+button_activities.grid(row=4, column=0)
 
 # button to set standard save directory
 button_standard_save = Button(frame, text="Set Standard Save-Directory", command=set_standard_save_path, height=5,
