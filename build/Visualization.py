@@ -5,11 +5,10 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *
 import time
 from datetime import date
-
-activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
 import time
 from datetime import date
-activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude,\
+
+activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
 raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \
 raw_lap_pool, raw_latitude, raw_longtitude, raw_sleep_state, raw_steps, \
 raw_vertical_radius = Datei_Import.get_dataframe()
@@ -41,6 +40,7 @@ def optimize_date(date_list):
         complete_date_list.append(complete_date)
     return complete_date_list
 
+
 # reducing date x ticks
 def date_xtick(date_list):
     date_length = len(date_list)
@@ -63,10 +63,9 @@ def distance_graph(timerange):
 
     now = time.localtime()
 
-
     now = time.localtime()
 
-    #Series to list
+    # Series to list
     datelist = distance.date.tolist()
 
     ax1 = fig.add_subplot()
@@ -137,20 +136,20 @@ def distance_graph(timerange):
             ax1.set_xticklabels(optimize_date(date_xtick(distance.date[start_index:end_index:-1])), rotation=15,
                                 fontsize=10)
 
-    #no specification
+    # no specification
     if timerange == null:
         ax1.bar(datelist[::-1], distance.value[::-1])
         ax1.set_xticks(date_xtick(datelist[::-1]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[::-1])), rotation=15, fontsize=10)
 
-    #in the following it is assumed that the values were recorded every day without gaps
+    # in the following it is assumed that the values were recorded every day without gaps
 
-    #last year
+    # last year
     elif timerange == "last_year":
         last_year = now.tm_year - 1
-        start_date = str(last_year)+"-01-01"
+        start_date = str(last_year) + "-01-01"
         end_date = str(now.tm_year) + "01-01"
-        #the data must contain values since the last year indicated
+        # the data must contain values since the last year indicated
         try:
             start_index = datelist.index(start_date)
             end_index = datelist.index(end_date)
@@ -159,19 +158,19 @@ def distance_graph(timerange):
             try:
                 end_index = 365
             except:
-                #in this case the list includes less than 365 values
+                # in this case the list includes less than 365 values
                 end_index = len(datelist)
         ax1.bar(datelist[start_index:end_index:-1], distance.value[start_index:end_index:-1])
         ax1.set_xticks(date_xtick(datelist[start_index:end_index:-1]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index:-1])), rotation=15, fontsize=10)
-    #last month
+    # last month
     elif timerange == "last_month":
         last_month = now.tm_month - 1
-        #in case of january
-        if(last_month == 0):
+        # in case of january
+        if (last_month == 0):
             last_month = 12
-        start_date = str(now.tm_year) +"-"+ str(last_month) + "-01"
-        end_date = str(now.tm_year) +"-"+ str(now.tm_month) + "-01"
+        start_date = str(now.tm_year) + "-" + str(last_month) + "-01"
+        end_date = str(now.tm_year) + "-" + str(now.tm_month) + "-01"
         # the data must contain values since the last month indicated
         end_index = datelist.index(end_date)
         try:
@@ -182,13 +181,13 @@ def distance_graph(timerange):
         ax1.set_xticks(date_xtick(datelist[start_index:end_index:-1]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index:-1])), rotation=15,
                             fontsize=10)
-    #last week
+    # last week
     elif timerange == "last_week":
         # date.today().weekday() == 0 is true if today is a monday
         monday_of_last_week = now.tm_day - date.today().weekday() - 7
         monday_of_current_week = monday_of_last_week + 7
-        start_date = str(now.tm_year) + "-" + str(now.tm_month) +"-"+ monday_of_last_week
-        end_date = str(now.tm_year) + "-" + str(now.tm_month) +"-"+ monday_of_current_week
+        start_date = str(now.tm_year) + "-" + str(now.tm_month) + "-" + monday_of_last_week
+        end_date = str(now.tm_year) + "-" + str(now.tm_month) + "-" + monday_of_current_week
         # the data must contain values since the last week indicated
         if (len(datelist) < 7):
             print("collect more data")
@@ -277,7 +276,7 @@ def save_calories_graph(path):
 
 def activities_pie():
     lst, time = Datei_Import.get_time_activities(activities)
-    activity_labels = ["Walking","Multisport","PingPong","Rowing","Gym","Swimming","Running"]
+    activity_labels = ["Walking", "Multisport", "PingPong", "Rowing", "Gym", "Swimming", "Running"]
     activity_count = []
     activity_count.append(lst.count("Walking"))
     activity_count.append(lst.count("Multi Sport"))

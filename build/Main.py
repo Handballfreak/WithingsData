@@ -8,12 +8,12 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 read_path = Datei_Import.get_vorlage_pfad()
 
-
 # import ctypes
 # user32 = ctypes.windll.user32
 # screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 # print(screensize)
 from datetime import date
+
 
 # def get_standard_path_save():
 # pfad = Datei_Import.get_pfad()
@@ -41,7 +41,6 @@ for i in range(1, len(split_first_line)):
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, \
 raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, \
 raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
-
 
 Visualization.testdatatype()
 
@@ -150,8 +149,6 @@ def steps_click():
     timeline_menu.add_command(label="last month", command=None)
     # last year
     timeline_menu.add_command(label="last year", command=None)
-
-
 
 
 # Open Frame with the elevation Graph
