@@ -15,7 +15,6 @@ read_path = Datei_Import.get_vorlage_pfad()
 # print(screensize)
 from datetime import date
 
-
 # def get_standard_path_save():
 # pfad = Datei_Import.get_pfad()
 # pfad_split = pfad.split("\\")
@@ -40,9 +39,11 @@ standard_path_save += split_first_line[0] + ":"
 for i in range(1, len(split_first_line)):
     standard_path_save += split_first_line[i]
 
-activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, raw_calories_earned, \
-raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, \
+activities, calories_earned, calories_passive, distance, elevation, steps, sleep,\
+raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed,\
+raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude,\
 raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
+
 
 # print(Datei_Import.get_walking(activities))
 # print(Datei_Import.get_rowing(activities))
@@ -136,6 +137,7 @@ def distance_click():
     # last year
     timeline_menu.add_command(label="last year", command=None)
 
+
 def last_month_click():
     graph1 = Toplevel()
     graph1.title("Distance Graph")
@@ -159,6 +161,7 @@ def last_month_click():
     # last year
     timeline_menu.add_command(label="last year", command=None)
 
+
 def last_week_click():
     graph1 = Toplevel()
     graph1.title("Distance Graph")
@@ -181,6 +184,7 @@ def last_week_click():
     timeline_menu.add_command(label="last month", command=last_month_click)
     # last year
     timeline_menu.add_command(label="last year", command=None)
+
 
 # Open Frame with the Steps Graph
 def steps_click():
