@@ -2,6 +2,7 @@
 from datetime import datetime
 import Datei_Import
 import Visualization
+import KI_algorithmen
 from tkinter import *
 from tkinter import filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -20,6 +21,7 @@ from datetime import date
 # pfad_split = pfad.split("\\")
 # standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
 # return standard_path_save
+print(KI_algorithmen.predict_step(300000))
 
 
 def set_standard_save_path():
@@ -48,10 +50,10 @@ raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 # print(Datei_Import.get_swimming(activities))
 # print(Datei_Import.get_running(activities))
 # print(Datei_Import.get_calories())
-lst, time = Datei_Import.get_time_activities(activities)
-print(len(lst))
-print(time)
-Visualization.activities_pie()
+# lst, time = Datei_Import.get_time_activities(activities)
+# print(len(lst))
+# print(time)
+# Visualization.activities_pie()
 
 
 def save_steps_click():

@@ -1,5 +1,9 @@
 Zusätzliche Dokumentation
 
-Neustart übrgreifende Save Variablenspeicherung (file erstellen und auslesen beim start)
-Namen hochzählen bei Graphen
-datenbank für variablen speicherung
+Neustart übrgreifende Save Variablenspeicherung (file erstellen und auslesen beim start) erledigt
+Namen hochzählen bei Graphen ersetzt durch Timestamps am Ende des Namens
+Ki User Eingabe prüfen
+    bei bereits erreichtem Ziel Datum des erreichen ausgeben
+    andernfalls vorraussichtliches Erreichen anzeigen
+    min auslösen hinweis das an x Wochentagen eine negative Tendenz aufzuweisen ist
+    ins Interface integrieren
