@@ -82,6 +82,7 @@ def distance_graph(timerange):
             start_index = datelist.index(start_date)
             end_index = datelist.index(end_date)+1
         except:
+            print("gaps in data")
             end_index = len(datelist)
             start_index = 0
         ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
@@ -106,6 +107,7 @@ def distance_graph(timerange):
             start_index = datelist.index(start_date)
             end_index = datelist.index(end_date)
         except:
+            print("gaps in data")
             start_index = 0
             end_index = len(datelist)
 
@@ -137,18 +139,17 @@ def distance_graph(timerange):
         start_date = str(now.tm_year) + "-" + str(last_week_month) + "-" + str(monday_of_last_week)
         end_date = str(now.tm_year) + "-" + str(month) + "-" + str(monday_of_current_week)
         # the data must contain values since the last week indicated
-        if (len(datelist) < 7):
-            print("collect more data")
-            ax1.bar(datelist[::], distance.value[::])
-            ax1.set_xticks(date_xtick(datelist[::]))
-            ax1.set_xticklabels(optimize_date(date_xtick(datelist[::])), rotation=15, fontsize=10)
-        else:
+        try:
             start_index = datelist.index(start_date)
-            end_index = datelist.index(end_date)+1
-            ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
-            ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
-            ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15,
-                                fontsize=10)
+            end_index = datelist.index(end_date) + 1
+        except:
+            print("gaps in data")
+            start_index = 0
+            end_index = len(datelist)
+        ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
+        ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
+        ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15,
+                            fontsize=10)
 
     plt.title("distance in m per day", fontsize=20)
     plt.xlabel("Date", fontsize=13)
