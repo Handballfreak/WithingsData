@@ -35,6 +35,7 @@ def get_dataframe():
     calories_earned = datei_einlesen("aggregates_calories_earned.csv")
     calories_passive = datei_einlesen("aggregates_calories_passive.csv")
     distance = datei_einlesen("aggregates_distance.csv")
+    #distance = datei_einlesen("distance_test_data.csv")
     elevation = datei_einlesen("aggregates_elevation.csv")
     steps = datei_einlesen("aggregates_steps.csv")
     sleep = datei_einlesen("sleep.csv")
