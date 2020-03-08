@@ -108,6 +108,11 @@ def train_steps(train_help):
 def predict_step(goal):
     sum_steps = sum(steps.value)
     difference = goal - sum_steps
+
+    #goal already achieved
+    if goal <= sum_steps:
+        return -1
+
     if (difference <= 100000):
         train_help = 4
         model_7, model_6, model_5, model_4, model_3, model_2, model_1 = train_steps(4)
@@ -199,3 +204,23 @@ def predict_step(goal):
         if (count_steps >= goal):
             return count_days
     return count_days
+
+
+def predict_step_evaluation(goal):
+    count_days = predict_step(goal)
+    string_evaluation=""
+    if count_days == -1:
+        max_steps = sum_steps
+        count_steps = 0
+        value_steps = steps.value.tolist()[::-1]
+        date_steps = steps.date.tolist()[::-1]
+        i = 0
+        while count_steps<max_steps:
+            count_steps+=value_steps[index]
+            i +=1
+        date = date_steps[i]
+        string_evaluation = "You already reached that goal at the " + date +"!"
+    else:
+
+        string_evaluation = "If you keep going you will propably achieve your goal on the "
+    return string_evaluation

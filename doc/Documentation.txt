@@ -7,3 +7,4 @@ Ki User Eingabe prüfen
     andernfalls vorraussichtliches Erreichen anzeigen
     min auslösen hinweis das an x Wochentagen eine negative Tendenz aufzuweisen ist
     ins Interface integrieren
+    negative Zahlen ausschließen
