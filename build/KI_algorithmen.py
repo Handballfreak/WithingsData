@@ -117,7 +117,7 @@ def predict_step(goal):
 
     day_7, day_6, day_5, day_4, day_3, day_2, day_1 = get_day(train_help)
     len_day_7 = len(day_7)
-    len_day_7 =np.array(len_day_7)
+    len_day_7 = np.array(len_day_7)
     len_day_7 = len_day_7.reshape(-1, 1)
     len_day_6 = len(day_6)
     len_day_6 = np.array(len_day_6)
@@ -132,7 +132,7 @@ def predict_step(goal):
     len_day_3 = np.array(len_day_3)
     len_day_3 = len_day_3.reshape(-1, 1)
     len_day_2 = len(day_2)
-    len_day_2= np.array(len_day_2)
+    len_day_2 = np.array(len_day_2)
     len_day_2 = len_day_2.reshape(-1, 1)
     len_day_1 = len(day_1)
     len_day_1 = np.array(len_day_1)
@@ -140,43 +140,62 @@ def predict_step(goal):
 
     count_steps = sum_steps
     count_days = 0
+    min_steps = min(steps.value)+1
     while count_steps < goal:
         len_day_1 += 1
         count_days += 1
-        count_steps += model_1.predict(len_day_1)
+        steps_day_1 = model_1.predict(len_day_1)
+        if steps_day_1<min_steps:
+            steps_day_1=min_steps
+        count_steps+=steps_day_1
         if (count_steps >= goal):
             return count_days
         len_day_2 += 1
         count_days += 1
-        count_steps += model_2.predict(len_day_2)
+        steps_day_2 = model_2.predict(len_day_2)
+        if steps_day_2 < min_steps:
+            steps_day_2 = min_steps
+        count_steps += steps_day_2
         if (count_steps >= goal):
             return count_days
         len_day_3 += 1
         count_days += 1
-        count_steps += model_3.predict(len_day_3)
+        steps_day_3 = model_3.predict(len_day_3)
+        if steps_day_3 < min_steps:
+            steps_day_3 = min_steps
+        count_steps += steps_day_3
         if (count_steps >= goal):
             return count_days
         len_day_4 += 1
         count_days += 1
-        count_steps += model_4.predict(len_day_4)
+        steps_day_4 = model_1.predict(len_day_4)
+        if steps_day_4 < min_steps:
+            steps_day_4 = min_steps
+        count_steps += steps_day_4
         if (count_steps >= goal):
             return count_days
         len_day_5 += 1
         count_days += 1
-        count_steps += model_5.predict(len_day_5)
+        steps_day_5 = model_5.predict(len_day_5)
+        if steps_day_5 < min_steps:
+            steps_day_5 = min_steps
+        count_steps += steps_day_5
         if (count_steps >= goal):
             return count_days
         len_day_6 += 1
         count_days += 1
-        count_steps += model_6.predict(len_day_6)
+        steps_day_6 = model_6.predict(len_day_6)
+        if steps_day_6 < min_steps:
+            steps_day_6 = min_steps
+        count_steps += steps_day_6
         if (count_steps >= goal):
             return count_days
         len_day_7 += 1
         count_days += 1
-        count_steps += model_7.predict(len_day_7)
+        steps_day_7 = model_7.predict(len_day_7)
+        if steps_day_7 < min_steps:
+            steps_day_7 = min_steps
+        count_steps += steps_day_7
         if (count_steps >= goal):
             return count_days
     return count_days
-
-print(sum(steps.value))
-print(predict_step(800000))
