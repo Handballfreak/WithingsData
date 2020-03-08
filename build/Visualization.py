@@ -4,6 +4,7 @@ import seaborn as sns
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *
 import time
+import datetime
 from datetime import date
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
@@ -63,13 +64,13 @@ def distance_graph(timerange):
 
     # Series to list
     datelist = distance.date.tolist()
-
+    #datelist.reverse()
     ax1 = fig.add_subplot()
     # no specification
     if timerange == "kein Limit":
-        ax1.bar(datelist[::-1], distance.value[::-1])
-        ax1.set_xticks(date_xtick(datelist[::-1]))
-        ax1.set_xticklabels(optimize_date(date_xtick(datelist[::-1])), rotation=15, fontsize=10)
+        ax1.bar(datelist[::], distance.value[::])
+        ax1.set_xticks(date_xtick(datelist[::]))
+        ax1.set_xticklabels(optimize_date(date_xtick(datelist[::])), rotation=15, fontsize=10)
     # in the following it is assumed that the values were recorded every day without gaps
     # last year
     elif timerange == "last year":
@@ -79,59 +80,74 @@ def distance_graph(timerange):
         # the data must contain values since the last year indicated
         try:
             start_index = datelist.index(start_date)
-            end_index = datelist.index(end_date)
+            end_index = datelist.index(end_date)+1
         except:
-            end_index = 0
-            start_index = len(datelist)
-        ax1.bar(datelist[start_index:end_index:-1], distance.value[start_index:end_index:-1])
-        ax1.set_xticks(date_xtick(datelist[start_index:end_index:-1]))
-        ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index:-1])), rotation=15, fontsize=10)
+            end_index = len(datelist)
+            start_index = 0
+        ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
+        ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
+        ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15, fontsize=10)
     # last month
     elif timerange == "last month":
-        last_month = now.tm_mon- 1
+        last_month = now.tm_mon - 1
+        this_month = now.tm_mon
         # in case of january
         if (last_month == 0):
             last_month = 12
         #add the zero to the month
         if(len(str(last_month)) < 2):
             last_month = "0"+str(last_month)
+        if (len(str(this_month)) < 2):
+            this_month = "0" + str(this_month)
         start_date = str(now.tm_year) + "-" + str(last_month) + "-01"
-        end_date = str(now.tm_year) + "-" + str(now.tm_mon) + "-01"
+        end_date = str(now.tm_year) + "-" + str(this_month) + "-01"
         # the data must contain values since the last month indicated
         try:
             start_index = datelist.index(start_date)
             end_index = datelist.index(end_date)
         except:
-            #the number of days in a month is simplified to 30 days for the time being
-            start_index = datelist.index(start_date)
-            end_index = 0
+            start_index = 0
+            end_index = len(datelist)
 
-        ax1.bar(datelist[start_index:end_index:-1], distance.value[start_index:end_index:-1])
-        ax1.set_xticks(date_xtick(datelist[start_index:end_index:-1]))
-        ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index:-1])), rotation=15,
+        ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
+        ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
+        ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15,
                             fontsize=10)
     # last week
     elif timerange == "last week":
         # date.today().weekday() == 0 is true if today is a monday
-        monday_of_last_week = now.tm_mday - date.today().weekday() - 7
-        monday_of_current_week = monday_of_last_week + 7
+
+        step_to_monday = datetime.timedelta(days=date.today().weekday())
+        week = datetime.timedelta(days=7)
+        mondaydate_of_current_week = datetime.datetime.now() - step_to_monday
+        mondaydate_of_last_week = mondaydate_of_current_week - week
+        monday_of_current_week = mondaydate_of_current_week.day
+        monday_of_last_week = mondaydate_of_last_week.day
+
+        if (len(str(monday_of_last_week)) < 2):
+            monday_of_last_week = "0" + str(monday_of_last_week)
+        if (len(str(monday_of_current_week)) < 2):
+            monday_of_current_week = "0" + str(monday_of_current_week)
         month = now.tm_mon
         if (len(str(month)) < 2):
-            month = "0" + str(last_month)
-        start_date = str(now.tm_year) + "-" + str(month) + "-" + monday_of_last_week
-        end_date = str(now.tm_year) + "-" + str(month) + "-" + monday_of_current_week
+            month = "0" + str(month)
+        last_week_month = mondaydate_of_last_week.month
+        if (len(str(last_week_month)) < 2):
+            last_week_month = "0" + str(last_week_month)
+        start_date = str(now.tm_year) + "-" + str(last_week_month) + "-" + str(monday_of_last_week)
+        end_date = str(now.tm_year) + "-" + str(month) + "-" + str(monday_of_current_week)
         # the data must contain values since the last week indicated
         if (len(datelist) < 7):
             print("collect more data")
-            ax1.bar(datelist[::-1], distance.value[::-1])
-            ax1.set_xticks(date_xtick(datelist[::-1]))
-            ax1.set_xticklabels(optimize_date(date_xtick(datelist[::-1])), rotation=15, fontsize=10)
+            ax1.bar(datelist[::], distance.value[::])
+            ax1.set_xticks(date_xtick(datelist[::]))
+            ax1.set_xticklabels(optimize_date(date_xtick(datelist[::])), rotation=15, fontsize=10)
         else:
             start_index = datelist.index(start_date)
-            end_index = datelist.index(end_date)
-            ax1.bar(datelist[start_index:end_index:-1], distance.value[start_index:end_index:-1])
-            ax1.set_xticks(date_xtick(datelist[start_index:end_index:-1]))
-            ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index:-1])), rotation=15,
+            end_index = datelist.index(end_date)+1
+            ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
+            ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
+            ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15,
                                 fontsize=10)
 
     plt.title("distance in m per day", fontsize=20)
