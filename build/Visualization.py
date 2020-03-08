@@ -64,7 +64,7 @@ def distance_graph(timerange):
 
     # Series to list
     datelist = distance.date.tolist()
-    #datelist.reverse()
+    datelist.reverse()
     ax1 = fig.add_subplot()
     # no specification
     if timerange == "kein Limit":
