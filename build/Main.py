@@ -2,6 +2,7 @@
 from datetime import datetime
 import Datei_Import
 import Visualization
+import KI_algorithmen
 from tkinter import *
 from tkinter import filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -20,6 +21,7 @@ from datetime import date
 # pfad_split = pfad.split("\\")
 # standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
 # return standard_path_save
+#print(KI_algorithmen.predict_step(300000))
 
 
 def set_standard_save_path():

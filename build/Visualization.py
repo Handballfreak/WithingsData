@@ -88,13 +88,13 @@ def distance_graph(timerange):
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index:-1])), rotation=15, fontsize=10)
     # last month
     elif timerange == "last month":
-        last_month = now.tm_mon- 1
+        last_month = now.tm_mon - 1
         # in case of january
         if (last_month == 0):
             last_month = 12
-        #add the zero to the month
-        if(len(str(last_month)) < 2):
-            last_month = "0"+str(last_month)
+        # add the zero to the month
+        if (len(str(last_month)) < 2):
+            last_month = "0" + str(last_month)
         start_date = str(now.tm_year) + "-" + str(last_month) + "-01"
         end_date = str(now.tm_year) + "-" + str(now.tm_mon) + "-01"
         # the data must contain values since the last month indicated
@@ -102,7 +102,7 @@ def distance_graph(timerange):
             start_index = datelist.index(start_date)
             end_index = datelist.index(end_date)
         except:
-            #the number of days in a month is simplified to 30 days for the time being
+            # the number of days in a month is simplified to 30 days for the time being
             start_index = datelist.index(start_date)
             end_index = 0
 
