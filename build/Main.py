@@ -301,8 +301,14 @@ def activities_click():
 
 def predict_step_click():
     def predict_KI_steps():
-        goal = int(Entry_Steps.get())
         string_evaluation = ""
+        goal = 0
+        #open bottom until reaching integer range
+        #unrealistic a person who lives 100 years must do around 60000 steps per day
+        try:
+            goal = int(Entry_Steps.get())
+        except ValueError:
+            string_evaluation = "ivalid input the input must be between 1 or 2100000000"
         if(goal<=0):
             string_evaluation = "ivalid input the input must be 1 or higher"
         else:
@@ -312,7 +318,7 @@ def predict_step_click():
     graph1 = Toplevel()
     graph1.title("Prediction Steps Goal")
     graph1.geometry("900x180")
-    T = Text(graph1, height = 5, width=120)
+    T = Text(graph1, height = 6, width=120)
     T.pack()
     rules="""
     Rules: 

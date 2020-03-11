@@ -106,12 +106,13 @@ def train_steps(train_help):
 
 
 def predict_step(goal):
+    trigger_min = False
     sum_steps = sum(steps.value)
     difference = goal - sum_steps
 
     # goal already achieved
     if goal <= sum_steps:
-        return -1
+        return -1, trigger_min
 
     if (difference <= 100000):
         train_help = 4
@@ -151,63 +152,71 @@ def predict_step(goal):
         count_days += 1
         steps_day_1 = model_1.predict(len_day_1)
         if steps_day_1 < min_steps:
+            trigger_min = True
             steps_day_1 = min_steps
         count_steps += steps_day_1
         if (count_steps >= goal):
-            return count_days
+            return count_days, trigger_min
         len_day_2 += 1
         count_days += 1
         steps_day_2 = model_2.predict(len_day_2)
         if steps_day_2 < min_steps:
+            trigger_min = True
             steps_day_2 = min_steps
         count_steps += steps_day_2
         if (count_steps >= goal):
-            return count_days
+            return count_days, trigger_min
         len_day_3 += 1
         count_days += 1
         steps_day_3 = model_3.predict(len_day_3)
         if steps_day_3 < min_steps:
+            trigger_min = True
             steps_day_3 = min_steps
         count_steps += steps_day_3
         if (count_steps >= goal):
-            return count_days
+            return count_days, trigger_min
         len_day_4 += 1
         count_days += 1
         steps_day_4 = model_1.predict(len_day_4)
         if steps_day_4 < min_steps:
+            trigger_min = True
             steps_day_4 = min_steps
         count_steps += steps_day_4
         if (count_steps >= goal):
-            return count_days
+            return count_days, trigger_min
         len_day_5 += 1
         count_days += 1
         steps_day_5 = model_5.predict(len_day_5)
         if steps_day_5 < min_steps:
+            trigger_min = True
             steps_day_5 = min_steps
         count_steps += steps_day_5
         if (count_steps >= goal):
-            return count_days
+            return count_days, trigger_min
         len_day_6 += 1
         count_days += 1
         steps_day_6 = model_6.predict(len_day_6)
         if steps_day_6 < min_steps:
+            trigger_min = True
             steps_day_6 = min_steps
         count_steps += steps_day_6
         if (count_steps >= goal):
-            return count_days
+            return count_days, trigger_min
         len_day_7 += 1
         count_days += 1
         steps_day_7 = model_7.predict(len_day_7)
         if steps_day_7 < min_steps:
+            trigger_min = True
             steps_day_7 = min_steps
         count_steps += steps_day_7
         if (count_steps >= goal):
-            return count_days
-    return count_days
+            return count_days, trigger_min
+
+    return count_days, trigger_min
 
 
 def predict_step_evaluation(goal):
-    count_days = predict_step(goal)
+    count_days, trigger_min = predict_step(goal)
     string_evaluation = ""
     date_steps = steps.date.tolist()[::-1]
     if count_days == -1:
@@ -224,4 +233,7 @@ def predict_step_evaluation(goal):
         success_date = pd.to_datetime(date_steps[-1]) + pd.DateOffset(days=count_days)
         string_evaluation = "If you keep going you will propably achieve your goal on the " + success_date.strftime(
             "%d/%m/%Y")
+    if trigger_min == True:
+        string_evaluation+= "\nOn at least one day a week you show a negative trend in your activity."
     return string_evaluation
+
