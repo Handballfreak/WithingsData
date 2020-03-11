@@ -57,23 +57,18 @@ def date_xtick(date_list):
     return date_xtick
 
 
-def distance_graph(timerange):
-    sns.set_context("notebook")
-    sns.set_style("darkgrid")
-    sns.set_palette("dark")
-    fig = plt.figure(figsize=(16, 7), dpi=100)
-
+def timeline_opt(datatype, timerange, ax1):
     now = time.localtime()
-
     # Series to list
-    datelist = distance.date.tolist()
+    datelist = datatype.date.tolist()
     datelist.reverse()
-    ax1 = fig.add_subplot()
+
     # no specification
     if timerange == "kein Limit":
-        ax1.bar(datelist[::], distance.value[::])
+        ax1.bar(datelist[::], datatype.value[::])
         ax1.set_xticks(date_xtick(datelist[::]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[::])), rotation=15, fontsize=10)
+
     # in the following it is assumed that the values were recorded every day without gaps
     # last year
     elif timerange == "last year":
@@ -83,14 +78,15 @@ def distance_graph(timerange):
         # the data must contain values since the last year indicated
         try:
             start_index = datelist.index(start_date)
-            end_index = datelist.index(end_date)+1
+            end_index = datelist.index(end_date) + 1
         except:
             print("gaps in data")
             Tk().withdraw()
             showerror(title="Error", message="Gaps in data")
-            #end_index = len(datelist)
-            #start_index = 0
-        ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
+            return FALSE
+            # end_index = len(datelist)
+            # start_index = 0
+        ax1.bar(datelist[start_index:end_index], datatype.value[start_index:end_index])
         ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15, fontsize=10)
     # last month
@@ -100,9 +96,9 @@ def distance_graph(timerange):
         # in case of january
         if (last_month == 0):
             last_month = 12
-        #add the zero to the month
-        if(len(str(last_month)) < 2):
-            last_month = "0"+str(last_month)
+        # add the zero to the month
+        if (len(str(last_month)) < 2):
+            last_month = "0" + str(last_month)
         if (len(str(this_month)) < 2):
             this_month = "0" + str(this_month)
         start_date = str(now.tm_year) + "-" + str(last_month) + "-01"
@@ -115,10 +111,11 @@ def distance_graph(timerange):
             print("gaps in data")
             Tk().withdraw()
             showerror(title="Error", message="Gaps in data")
-            #start_index = 0
-            #end_index = len(datelist)
+            # start_index = 0
+            # end_index = len(datelist)
+            return FALSE
 
-        ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
+        ax1.bar(datelist[start_index:end_index], datatype.value[start_index:end_index])
         ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15,
                             fontsize=10)
@@ -154,16 +151,27 @@ def distance_graph(timerange):
             Tk().withdraw()
             showerror(title="Error", message="Gaps in data")
             #start_index = 0
-            #end_index = len(datelist)
-        ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
+            # end_index = len(datelist)
+            return FALSE
+        ax1.bar(datelist[start_index:end_index], datatype.value[start_index:end_index])
         ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15,
                             fontsize=10)
+    return TRUE
 
-    plt.title("distance in m per day", fontsize=20)
-    plt.xlabel("Date", fontsize=13)
-    plt.ylabel("distance in m", fontsize=13)
-    return fig
+
+def distance_graph(timerange):
+    sns.set_context("notebook")
+    sns.set_style("darkgrid")
+    sns.set_palette("dark")
+    fig = plt.figure(figsize=(16, 7), dpi=100)
+    ax1 = fig.add_subplot()
+
+    if timeline_opt(distance, timerange, ax1):
+        plt.title("distance in m per day", fontsize=20)
+        plt.xlabel("Date", fontsize=13)
+        plt.ylabel("distance in m", fontsize=13)
+        return fig
 
 
 # save the distance graph
