@@ -15,6 +15,7 @@ read_path = Datei_Import.get_vorlage_pfad()
 # print(screensize)
 from datetime import date
 
+
 # def get_standard_path_save():
 # pfad = Datei_Import.get_pfad()
 # pfad_split = pfad.split("\\")
@@ -39,9 +40,9 @@ standard_path_save += split_first_line[0] + ":"
 for i in range(1, len(split_first_line)):
     standard_path_save += split_first_line[i]
 
-activities, calories_earned, calories_passive, distance, elevation, steps, sleep,\
-raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed,\
-raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude,\
+activities, calories_earned, calories_passive, distance, elevation, steps, sleep, \
+raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, \
+raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, \
 raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 
 
@@ -136,6 +137,7 @@ def distance_click():
     timeline_menu.add_command(label="last month", command=last_month_click)
     # last year
     timeline_menu.add_command(label="last year", command=last_year_click)
+
 
 def last_year_click():
     graph1 = Toplevel()
@@ -298,29 +300,28 @@ def activities_click():
     filemenu.add_command(label="Save as", command=save_activities_click)
 
 
-
 def predict_step_click():
     def predict_KI_steps():
         string_evaluation = ""
         goal = 0
-        #open bottom until reaching integer range
-        #unrealistic a person who lives 100 years must do around 60000 steps per day
+        # open bottom until reaching integer range
+        # unrealistic a person who lives 100 years must do around 60000 steps per day
         try:
             goal = int(Entry_Steps.get())
         except ValueError:
             string_evaluation = "ivalid input the input must be between 1 or 2100000000"
-        if(goal<=0):
+        if (goal <= 0):
             string_evaluation = "ivalid input the input must be 1 or higher"
         else:
             string_evaluation = KI_algorithmen.predict_step_evaluation(goal)
-        label_Note.config(text=string_evaluation, bg= "#D5E88F")
+        label_Note.config(text=string_evaluation, bg="#D5E88F")
 
     graph1 = Toplevel()
     graph1.title("Prediction Steps Goal")
     graph1.geometry("900x180")
-    T = Text(graph1, height = 6, width=120)
+    T = Text(graph1, height=6, width=120)
     T.pack()
-    rules="""
+    rules = """
     Rules: 
     1. For getting a prediction when you reach your goal enter the total steps you want to reach. 
     2. For getting the day when you reached a total amount of stepss, enter the amount of steps.
@@ -328,14 +329,15 @@ def predict_step_click():
     4. The algorithm will tell you if you reduced your activities
     """
     T.insert(END, rules)
-    labelSteps = Label(graph1, bg = "#FFCFC9", text="Total amount of steps")
+    labelSteps = Label(graph1, bg="#FFCFC9", text="Total amount of steps")
     labelSteps.pack()
-    Entry_Steps = Entry(graph1, bg = "white")
+    Entry_Steps = Entry(graph1, bg="white")
     Entry_Steps.pack()
     button_predict = Button(graph1, text="predict", command=predict_KI_steps)
     button_predict.pack()
-    label_Note = Label(graph1,  text="")
+    label_Note = Label(graph1, text="")
     label_Note.pack()
+
 
 # Main frame
 frame = Tk()
@@ -360,9 +362,9 @@ button_calories.grid(row=3, column=0)
 button_activities = Button(frame, text="Activities graph", command=activities_click, height=5, width=20)
 button_activities.grid(row=4, column=0)
 
-#Button prediction when reaching steps goal
-button_prediction_step = Button(frame, text="Prediction Steps goal", command = predict_step_click, height = 5, width=20)
-button_prediction_step.grid(row=0, column =1)
+# Button prediction when reaching steps goal
+button_prediction_step = Button(frame, text="Prediction Steps goal", command=predict_step_click, height=5, width=20)
+button_prediction_step.grid(row=0, column=1)
 
 # button to set standard save directory
 button_standard_save = Button(frame, text="Set Standard Save-Directory", command=set_standard_save_path, height=5,
