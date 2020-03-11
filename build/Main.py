@@ -20,7 +20,7 @@ from datetime import date
 # pfad_split = pfad.split("\\")
 # standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
 # return standard_path_save
-print(KI_algorithmen.predict_step(300000))
+print(KI_algorithmen.predict_step_evaluation(200000))
 
 
 def set_standard_save_path():
