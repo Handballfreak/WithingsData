@@ -20,7 +20,7 @@ from datetime import date
 # pfad_split = pfad.split("\\")
 # standard_path_save = pfad_split[0] + "\\" + pfad_split[1] + "\\" + pfad_split[2] + "\\pictures"
 # return standard_path_save
-print(KI_algorithmen.predict_step_evaluation(200000))
+# print(KI_algorithmen.predict_step_evaluation(200000))
 
 
 def set_standard_save_path():
@@ -298,6 +298,39 @@ def activities_click():
     filemenu.add_command(label="Save as", command=save_activities_click)
 
 
+
+def predict_step_click():
+    def predict_KI_steps():
+        goal = int(Entry_Steps.get())
+        string_evaluation = ""
+        if(goal<=0):
+            string_evaluation = "ivalid input the input must be 1 or higher"
+        else:
+            string_evaluation = KI_algorithmen.predict_step_evaluation(goal)
+        label_Note.config(text=string_evaluation, bg= "#D5E88F")
+
+    graph1 = Toplevel()
+    graph1.title("Prediction Steps Goal")
+    graph1.geometry("900x180")
+    T = Text(graph1, height = 5, width=120)
+    T.pack()
+    rules="""
+    Rules: 
+    1. For getting a prediction when you reach your goal enter the total steps you want to reach. 
+    2. For getting the day when you reached a total amount of stepss, enter the amount of steps.
+    3. The algorithm will give a error for negative values
+    4. The algorithm will tell you if you reduced your activities
+    """
+    T.insert(END, rules)
+    labelSteps = Label(graph1, bg = "#FFCFC9", text="Total amount of steps")
+    labelSteps.pack()
+    Entry_Steps = Entry(graph1, bg = "white")
+    Entry_Steps.pack()
+    button_predict = Button(graph1, text="predict", command=predict_KI_steps)
+    button_predict.pack()
+    label_Note = Label(graph1,  text="")
+    label_Note.pack()
+
 # Main frame
 frame = Tk()
 frame.title("Withings Data Analyse Tool")
@@ -321,8 +354,12 @@ button_calories.grid(row=3, column=0)
 button_activities = Button(frame, text="Activities graph", command=activities_click, height=5, width=20)
 button_activities.grid(row=4, column=0)
 
+#Button prediction when reaching steps goal
+button_prediction_step = Button(frame, text="Prediction Steps goal", command = predict_step_click, height = 5, width=20)
+button_prediction_step.grid(row=0, column =1)
+
 # button to set standard save directory
 button_standard_save = Button(frame, text="Set Standard Save-Directory", command=set_standard_save_path, height=5,
                               width=20)
-button_standard_save.grid(row=0, column=1)
+button_standard_save.grid(row=0, column=2)
 frame.mainloop()

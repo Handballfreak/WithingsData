@@ -109,7 +109,7 @@ def predict_step(goal):
     sum_steps = sum(steps.value)
     difference = goal - sum_steps
 
-    #goal already achieved
+    # goal already achieved
     if goal <= sum_steps:
         return -1
 
@@ -208,19 +208,20 @@ def predict_step(goal):
 
 def predict_step_evaluation(goal):
     count_days = predict_step(goal)
-    string_evaluation=""
+    string_evaluation = ""
     date_steps = steps.date.tolist()[::-1]
     if count_days == -1:
         max_steps = goal
         count_steps = 0
         value_steps = steps.value.tolist()[::-1]
         i = 0
-        while count_steps<=max_steps:
-            count_steps+=value_steps[i]
-            i +=1
-        date = date_steps[i-1]
-        string_evaluation = "You already reached that goal at the " + date +"!"
+        while count_steps <= max_steps:
+            count_steps += value_steps[i]
+            i += 1
+        date = date_steps[i - 1]
+        string_evaluation = "You already reached that goal at the " + date + "!"
     else:
-        success_date = pd.to_datetime(date_steps[-1])+pd.DateOffset(days=count_days)
-        string_evaluation = "If you keep going you will propably achieve your goal on the "+success_date.strftime("%d/%m/%Y")
+        success_date = pd.to_datetime(date_steps[-1]) + pd.DateOffset(days=count_days)
+        string_evaluation = "If you keep going you will propably achieve your goal on the " + success_date.strftime(
+            "%d/%m/%Y")
     return string_evaluation
