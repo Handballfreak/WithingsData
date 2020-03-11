@@ -6,6 +6,9 @@ from tkinter import *
 import time
 import datetime
 from datetime import date
+from tkinter import *
+from tkinter.messagebox import showerror
+
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
 raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \
@@ -83,8 +86,10 @@ def distance_graph(timerange):
             end_index = datelist.index(end_date)+1
         except:
             print("gaps in data")
-            end_index = len(datelist)
-            start_index = 0
+            Tk().withdraw()
+            showerror(title="Error", message="Gaps in data")
+            #end_index = len(datelist)
+            #start_index = 0
         ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
         ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15, fontsize=10)
@@ -108,8 +113,10 @@ def distance_graph(timerange):
             end_index = datelist.index(end_date)
         except:
             print("gaps in data")
-            start_index = 0
-            end_index = len(datelist)
+            Tk().withdraw()
+            showerror(title="Error", message="Gaps in data")
+            #start_index = 0
+            #end_index = len(datelist)
 
         ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
         ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
@@ -144,8 +151,10 @@ def distance_graph(timerange):
             end_index = datelist.index(end_date) + 1
         except:
             print("gaps in data")
-            start_index = 0
-            end_index = len(datelist)
+            Tk().withdraw()
+            showerror(title="Error", message="Gaps in data")
+            #start_index = 0
+            #end_index = len(datelist)
         ax1.bar(datelist[start_index:end_index], distance.value[start_index:end_index])
         ax1.set_xticks(date_xtick(datelist[start_index:end_index]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[start_index:end_index])), rotation=15,
