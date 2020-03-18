@@ -118,6 +118,7 @@ def standard_save_calories():
 def distance_click():
     graph1 = Toplevel()
     graph1.title("Distance Graph")
+    graph1.configure(background='white')
     canvas = FigureCanvasTkAgg(Visualization.distance_graph("kein Limit"), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
@@ -142,6 +143,7 @@ def distance_click():
 def last_year_click():
     graph1 = Toplevel()
     graph1.title("Distance Graph")
+    graph1.configure(background='white')
     canvas = FigureCanvasTkAgg(Visualization.distance_graph("last year"), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
@@ -166,6 +168,7 @@ def last_year_click():
 def last_month_click():
     graph1 = Toplevel()
     graph1.title("Distance Graph")
+    graph1.configure(background='white')
     canvas = FigureCanvasTkAgg(Visualization.distance_graph("last month"), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
@@ -190,6 +193,7 @@ def last_month_click():
 def last_week_click():
     graph1 = Toplevel()
     graph1.title("Distance Graph")
+    graph1.configure(background='white')
     canvas = FigureCanvasTkAgg(Visualization.distance_graph("last week"), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
@@ -215,6 +219,7 @@ def last_week_click():
 def steps_click():
     graph1 = Toplevel()
     graph1.title("Steps Graph")
+    graph1.configure(background='white')
     canvas = FigureCanvasTkAgg(Visualization.steps_graph(), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
@@ -240,6 +245,7 @@ def steps_click():
 def elevation_click():
     graph1 = Toplevel()
     graph1.title("Elevation Graph")
+    graph1.configure(background='white')
     canvas = FigureCanvasTkAgg(Visualization.elevation_graph(), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
@@ -264,6 +270,7 @@ def elevation_click():
 def calories_click():
     graph1 = Toplevel()
     graph1.title("Calories Graph")
+    graph1.configure(background='white')
     canvas = FigureCanvasTkAgg(Visualization.calories_graph(), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
@@ -288,6 +295,7 @@ def calories_click():
 def activities_click():
     graph1 = Toplevel()
     graph1.title("Activities Graph")
+    graph1.configure(background='white')
     canvas = FigureCanvasTkAgg(Visualization.activities_pie(), graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
@@ -318,7 +326,8 @@ def predict_step_click():
 
     graph1 = Toplevel()
     graph1.title("Prediction Steps Goal")
-    graph1.geometry("900x180")
+    graph1.geometry("900x200")
+    graph1.configure(background='white')
     T = Text(graph1, height=6, width=120)
     T.pack()
     rules = """
@@ -329,13 +338,14 @@ def predict_step_click():
     4. The algorithm will tell you if you reduced your activities
     """
     T.insert(END, rules)
+    T.config(state=DISABLED)
     labelSteps = Label(graph1, bg="#FFCFC9", text="Total amount of steps")
     labelSteps.pack()
     Entry_Steps = Entry(graph1, bg="white")
     Entry_Steps.pack()
     button_predict = Button(graph1, text="predict", command=predict_KI_steps)
     button_predict.pack()
-    label_Note = Label(graph1, text="")
+    label_Note = Label(graph1, text="", bg = "white")
     label_Note.pack()
 
 
@@ -343,6 +353,7 @@ def predict_step_click():
 frame = Tk()
 frame.title("Withings Data Analyse Tool")
 frame.geometry("600x600")
+frame.configure(background='blue')
 
 # button to produce distance graph
 button_distance = Button(frame, text="distance graph", command=distance_click, height=5, width=20)
