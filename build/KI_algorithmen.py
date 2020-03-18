@@ -232,7 +232,7 @@ def predict_step_evaluation(goal):
     else:
         success_date = pd.to_datetime(date_steps[-1]) + pd.DateOffset(days=count_days)
         string_evaluation = "If you keep going you will propably achieve your goal on the " + success_date.strftime(
-            "%d/%m/%Y")
+            "%d/%m/%Y"+".")
     if trigger_min == True:
         string_evaluation += "\nOn at least one day a week you show a negative trend in your activity."
     return string_evaluation
