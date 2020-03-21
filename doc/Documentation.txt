@@ -8,3 +8,7 @@ Ki User Eingabe prüfen
     min auslösen hinweis das an einem Wochentag eine negative Tendenz aufzuweisen ist
     ins Interface integrieren
     negative Zahlen ausschließen
+
+
+3 häufigsten Orte bestimmen und auf Karte anzeigen
+
