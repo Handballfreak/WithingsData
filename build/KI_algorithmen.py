@@ -146,7 +146,7 @@ def predict_step(goal):
 
     count_steps = sum_steps
     count_days = 0
-    min_steps = min(steps.value) + 1
+    min_steps = steps.value[steps.value > 0].min()
     while count_steps < goal:
         len_day_1 += 1
         count_days += 1

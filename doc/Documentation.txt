@@ -1,6 +1,6 @@
 Zusätzliche Dokumentation
 
-Neustart übrgreifende Save Variablenspeicherung (file erstellen und auslesen beim start) erledigt
+Neustart übrgreifende Save Variablenspeicherung (auslesen beim start) erledigt
 Namen hochzählen bei Graphen ersetzt durch Timestamps am Ende des Namens
 Ki User Eingabe prüfen
     bei bereits erreichtem Ziel Datum des erreichen ausgeben
