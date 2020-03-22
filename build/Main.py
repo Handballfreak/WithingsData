@@ -116,15 +116,23 @@ def standard_save_calories():
 
 # Open Frame with the Distance Graph
 def distance_click():
+    fig = Visualization.distance_graph("no limit")[1]
+    open_graph(fig, "distance")
+
+
+def open_graph(fig, data):
     graph1 = Toplevel()
-    graph1.title("Distance Graph")
+    graph1.title(data + " graph")
     graph1.configure(background='white')
-    canvas = FigureCanvasTkAgg(Visualization.distance_graph("kein Limit"), graph1)
+    canvas = FigureCanvasTkAgg(fig, graph1)
     canvas._tkcanvas.grid(row=1, column=1)
     menubar = Menu(graph1)
     graph1.config(menu=menubar)
     filemenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="File", menu=filemenu)
+
+    #LAMBDA für command schreiben
+
     # In einem Standardpfad speichern
     filemenu.add_command(label="Save", command=standard_save_distance)
     # Speichern unter festgelegtem Namen und Pfad
@@ -132,87 +140,40 @@ def distance_click():
 
     timeline_menu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="Timeline", menu=timeline_menu)
+
     # last 7 days
-    timeline_menu.add_command(label="last week", command=last_week_click)
+    timeline_menu.add_command(label="last week", command= lambda: timeline_click(data, "last week"))
     # last month
-    timeline_menu.add_command(label="last month", command=last_month_click)
-    # last year
-    timeline_menu.add_command(label="last year", command=last_year_click)
+    timeline_menu.add_command(label="last month", command=lambda: timeline_click(data, "last month"))
+    #last year
+    timeline_menu.add_command(label="last year", command=lambda: timeline_click(data, "last year"))
+
+def timeline_click(data, timerange):
+    no_error = False
+    if data == "distance":
+        no_error, fig = Visualization.distance_graph(timerange)
+    elif data == "elevation":
+        no_error, fig = Visualization.elevation_graph(timerange)
+    if no_error:
+        open_graph(fig, data)
 
 
-def last_year_click():
-    graph1 = Toplevel()
-    graph1.title("Distance Graph")
-    graph1.configure(background='white')
-    canvas = FigureCanvasTkAgg(Visualization.distance_graph("last year"), graph1)
-    canvas._tkcanvas.grid(row=1, column=1)
-    menubar = Menu(graph1)
-    graph1.config(menu=menubar)
-    filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="File", menu=filemenu)
-    # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=standard_save_distance)
-    # Speichern unter festgelegtem Namen und Pfad
-    filemenu.add_command(label="Save as", command=save_distance_click)
-
-    timeline_menu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Timeline", menu=timeline_menu)
-    # last 7 days
-    timeline_menu.add_command(label="last week", command=last_week_click)
-    # last month
-    timeline_menu.add_command(label="last month", command=last_month_click)
-    # last year
-    timeline_menu.add_command(label="last year", command=last_year_click)
+def last_year_click_distance():
+    no_error, fig = Visualization.distance_graph("last year")
+    if no_error:
+        open_graph(fig)
 
 
-def last_month_click():
-    graph1 = Toplevel()
-    graph1.title("Distance Graph")
-    graph1.configure(background='white')
-    canvas = FigureCanvasTkAgg(Visualization.distance_graph("last month"), graph1)
-    canvas._tkcanvas.grid(row=1, column=1)
-    menubar = Menu(graph1)
-    graph1.config(menu=menubar)
-    filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="File", menu=filemenu)
-    # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=standard_save_distance)
-    # Speichern unter festgelegtem Namen und Pfad
-    filemenu.add_command(label="Save as", command=save_distance_click)
-
-    timeline_menu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Timeline", menu=timeline_menu)
-    # last 7 days
-    timeline_menu.add_command(label="last week", command=last_week_click)
-    # last month
-    timeline_menu.add_command(label="last month", command=last_month_click)
-    # last year
-    timeline_menu.add_command(label="last year", command=last_year_click)
+def last_month_click_distance():
+    no_error, fig = Visualization.distance_graph("last month")
+    if no_error:
+        open_graph(fig)
 
 
-def last_week_click():
-    graph1 = Toplevel()
-    graph1.title("Distance Graph")
-    graph1.configure(background='white')
-    canvas = FigureCanvasTkAgg(Visualization.distance_graph("last week"), graph1)
-    canvas._tkcanvas.grid(row=1, column=1)
-    menubar = Menu(graph1)
-    graph1.config(menu=menubar)
-    filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="File", menu=filemenu)
-    # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=standard_save_distance)
-    # Speichern unter festgelegtem Namen und Pfad
-    filemenu.add_command(label="Save as", command=save_distance_click)
-
-    timeline_menu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Timeline", menu=timeline_menu)
-    # last 7 days
-    timeline_menu.add_command(label="last week", command=last_week_click)
-    # last month
-    timeline_menu.add_command(label="last month", command=last_month_click)
-    # last year
-    timeline_menu.add_command(label="last year", command=last_year_click)
+def last_week_click_distance():
+    no_error, fig = Visualization.distance_graph("last week")
+    if no_error:
+        open_graph(fig)
 
 
 # Open Frame with the Steps Graph
@@ -243,28 +204,9 @@ def steps_click():
 
 # Open Frame with the elevation Graph
 def elevation_click():
-    graph1 = Toplevel()
-    graph1.title("Elevation Graph")
-    graph1.configure(background='white')
-    canvas = FigureCanvasTkAgg(Visualization.elevation_graph(), graph1)
-    canvas._tkcanvas.grid(row=1, column=1)
-    menubar = Menu(graph1)
-    graph1.config(menu=menubar)
-    filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="File", menu=filemenu)
-    # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=standard_save_elevation)
-    # Speichern unter festgelegtem Namen und Pfad
-    filemenu.add_command(label="Save as", command=save_elevation_click)
+    fig = Visualization.elevation_graph("no limit")[1]
+    open_graph(fig, "elevation")
 
-    timeline_menu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Timeline", menu=timeline_menu)
-    # last 7 days
-    timeline_menu.add_command(label="last week", command=None)
-    # last month
-    timeline_menu.add_command(label="last month", command=None)
-    # last year
-    timeline_menu.add_command(label="last year", command=None)
 
 
 def calories_click():

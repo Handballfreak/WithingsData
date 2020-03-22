@@ -63,7 +63,7 @@ def timeline_opt(datatype, timerange, ax1):
     datelist.reverse()
 
     # no specification
-    if timerange == "kein Limit":
+    if timerange == "no limit":
         ax1.bar(datelist[::], datatype.value[::])
         ax1.set_xticks(date_xtick(datelist[::]))
         ax1.set_xticklabels(optimize_date(date_xtick(datelist[::])), rotation=15, fontsize=10)
@@ -170,7 +170,9 @@ def distance_graph(timerange):
         plt.title("distance in m per day", fontsize=20)
         plt.xlabel("Date", fontsize=13)
         plt.ylabel("distance in m", fontsize=13)
-        return fig
+        return TRUE, fig
+    else:
+        return False, None
 
 
 # save the distance graph
@@ -179,19 +181,21 @@ def save_distance_graph(path):
     plt.savefig(path)
 
 
-def elevation_graph():
+def elevation_graph(timerange):
     sns.set_context("notebook")
     sns.set_style("darkgrid")
     sns.set_palette("dark")
-    fig = plt.figure(figsize=(16, 7))
+    fig = plt.figure(figsize=(16, 7), dpi=100)
     ax1 = fig.add_subplot()
-    ax1.plot(elevation.date[::-1], elevation.value[::-1])
-    ax1.set_xticks(date_xtick(elevation.date[::-1]))
-    ax1.set_xticklabels(optimize_date(date_xtick(elevation.date[::-1])), rotation=15, fontsize=10)
-    plt.title("elevation in m per day", fontsize=20)
-    plt.xlabel("Date", fontsize=13)
-    plt.ylabel("elevation", fontsize=13)
-    return fig
+
+    if timeline_opt(elevation, timerange, ax1):
+        plt.title("elevation in m per day", fontsize=20)
+        plt.xlabel("Date", fontsize=13)
+        plt.ylabel("elevation", fontsize=13)
+        return True, fig
+    else:
+        return False, None
+
 
 
 def save_elevation_graph(path):
