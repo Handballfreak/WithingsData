@@ -86,12 +86,6 @@ def set_data():
     button_choose = Button(graph1, text="choose", command=choose_zip)
     button_choose.pack()
 
-def save_steps_click():
-    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
-                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
-    Visualization.save_steps_graph(frame.filename)
-
-
 def standard_save(data):
     print(standard_path_save)
     timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
@@ -101,22 +95,6 @@ def save_click():
     frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
                                                   filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
     Visualization.save_graph(frame.filename)
-
-def standard_save_steps():
-    print(standard_path_save)
-    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
-    Visualization.save_steps_graph(standard_path_save + "\\" + "steps" + timestamp + ".png")
-
-
-def save_distance_click():
-    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
-                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
-    Visualization.save_distance_graph(frame.filename)
-
-
-def standard_save_distance():
-    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
-    Visualization.save_distance_graph(standard_path_save + "\\" + "distance" + timestamp + ".png")
 
 
 def save_activities_click():
@@ -128,28 +106,6 @@ def save_activities_click():
 def standard_save_activities():
     timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
     Visualization.save_activities_graph(standard_path_save + "\\" + "activities" + timestamp + ".png")
-
-
-def save_elevation_click():
-    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
-                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
-    Visualization.save_elevation_graph(frame.filename)
-
-
-def standard_save_elevation():
-    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
-    Visualization.save_elevation_graph(standard_path_save + "\\" + "elevation" + timestamp + ".png")
-
-
-def save_calories_click():
-    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
-                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
-    Visualization.save_calories_graph(frame.filename)
-
-
-def standard_save_calories():
-    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
-    Visualization.save_calories_graph(standard_path_save + "\\" + "calories" + timestamp + ".png")
 
 
 # Open Frame with the Distance Graph
@@ -188,11 +144,10 @@ def open_graph(fig, data):
     filemenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="File", menu=filemenu)
 
+
     # In einem Standardpfad speichern
-    #filemenu.add_command(label="Save", command=standard_save_distance)
-    # Speichern unter festgelegtem Namen und Pfad
-    #filemenu.add_command(label="Save as", command=save_distance_click)
     filemenu.add_command(label="Save", command=lambda: standard_save(data))
+    # Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_click)
 
     timeline_menu = Menu(menubar, tearoff=0)

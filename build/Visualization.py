@@ -175,11 +175,6 @@ def distance_graph(timerange):
         return False, None
 
 
-# save the distance graph
-def save_distance_graph(path):
-    distance_graph(null)
-    plt.savefig(path)
-
 
 def elevation_graph(timerange):
     sns.set_context("notebook")
@@ -236,6 +231,7 @@ def calories_graph(timerange):
         return True, fig
     else:
         return False, None
+
 
 
 def save_calories_graph(path):
