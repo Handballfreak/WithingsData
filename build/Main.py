@@ -64,6 +64,16 @@ def save_steps_click():
     Visualization.save_steps_graph(frame.filename)
 
 
+def standard_save(data):
+    print(standard_path_save)
+    timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
+    Visualization.save_graph(standard_path_save + "\\" + data + timestamp + ".png")
+
+def save_click():
+    frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
+                                                  filetypes=(("jpeg files", "*.jpg"), ("png files", "*.png")))
+    Visualization.save_graph(frame.filename)
+
 def standard_save_steps():
     print(standard_path_save)
     timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
@@ -120,6 +130,25 @@ def distance_click():
     open_graph(fig, "distance")
 
 
+# Open Frame with the Steps Graph
+def steps_click():
+    fig = Visualization.steps_graph("no limit")[1]
+    open_graph(fig, "steps")
+
+
+
+# Open Frame with the elevation Graph
+def elevation_click():
+    fig = Visualization.elevation_graph("no limit")[1]
+    open_graph(fig, "elevation")
+
+
+
+def calories_click():
+    fig = Visualization.calories_graph("no limit")[1]
+    open_graph(fig, "calories")
+
+
 def open_graph(fig, data):
     graph1 = Toplevel()
     graph1.title(data + " graph")
@@ -131,12 +160,12 @@ def open_graph(fig, data):
     filemenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="File", menu=filemenu)
 
-    #LAMBDA für command schreiben
-
     # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=standard_save_distance)
+    #filemenu.add_command(label="Save", command=standard_save_distance)
     # Speichern unter festgelegtem Namen und Pfad
-    filemenu.add_command(label="Save as", command=save_distance_click)
+    #filemenu.add_command(label="Save as", command=save_distance_click)
+    filemenu.add_command(label="Save", command=lambda: standard_save(data))
+    filemenu.add_command(label="Save as", command=save_click)
 
     timeline_menu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="Timeline", menu=timeline_menu)
@@ -162,35 +191,6 @@ def timeline_click(data, timerange):
     if no_error:
         open_graph(fig, data)
 
-
-# Open Frame with the Steps Graph
-def steps_click():
-    fig = Visualization.steps_graph("no limit")[1]
-    open_graph(fig, "steps")
-
-
-    # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=standard_save_steps)
-    #Speichern unter festgelegtem Namen und Pfad
-    filemenu.add_command(label="Save as", command=save_steps_click)
-
-
-# Open Frame with the elevation Graph
-def elevation_click():
-    fig = Visualization.elevation_graph("no limit")[1]
-    open_graph(fig, "elevation")
-
-
-
-def calories_click():
-    fig = Visualization.calories_graph("no limit")[1]
-    open_graph(fig, "calories")
-
-
-    # In einem Standardpfad speichern
-    filemenu.add_command(label="Save", command=standard_save_calories)
-    # Speichern unter festgelegtem Namen und Pfad
-    filemenu.add_command(label="Save as", command=save_calories_click)
 
 
 def activities_click():

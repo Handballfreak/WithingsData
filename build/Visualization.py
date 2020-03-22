@@ -219,9 +219,7 @@ def steps_graph(timerange):
         return False, None
 
 
-
-def save_steps_graph(path):
-    steps_graph()
+def save_graph(path):
     plt.savefig(path)
 
 
