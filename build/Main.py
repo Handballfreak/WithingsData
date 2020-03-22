@@ -148,58 +148,31 @@ def open_graph(fig, data):
     #last year
     timeline_menu.add_command(label="last year", command=lambda: timeline_click(data, "last year"))
 
+
 def timeline_click(data, timerange):
     no_error = False
     if data == "distance":
         no_error, fig = Visualization.distance_graph(timerange)
     elif data == "elevation":
         no_error, fig = Visualization.elevation_graph(timerange)
+    elif data == "steps":
+        no_error, fig = Visualization.steps_graph(timerange)
+    elif data == "calories":
+        no_error, fig = Visualization.calories_graph(timerange)
     if no_error:
         open_graph(fig, data)
 
 
-def last_year_click_distance():
-    no_error, fig = Visualization.distance_graph("last year")
-    if no_error:
-        open_graph(fig)
-
-
-def last_month_click_distance():
-    no_error, fig = Visualization.distance_graph("last month")
-    if no_error:
-        open_graph(fig)
-
-
-def last_week_click_distance():
-    no_error, fig = Visualization.distance_graph("last week")
-    if no_error:
-        open_graph(fig)
-
-
 # Open Frame with the Steps Graph
 def steps_click():
-    graph1 = Toplevel()
-    graph1.title("Steps Graph")
-    graph1.configure(background='white')
-    canvas = FigureCanvasTkAgg(Visualization.steps_graph(), graph1)
-    canvas._tkcanvas.grid(row=1, column=1)
-    menubar = Menu(graph1)
-    graph1.config(menu=menubar)
-    filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="File", menu=filemenu)
+    fig = Visualization.steps_graph("no limit")[1]
+    open_graph(fig, "steps")
+
+
     # In einem Standardpfad speichern
     filemenu.add_command(label="Save", command=standard_save_steps)
-    # Speichern unter festgelegtem Namen und Pfad
+    #Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_steps_click)
-
-    timeline_menu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Timeline", menu=timeline_menu)
-    # last 7 days
-    timeline_menu.add_command(label="last week", command=None)
-    # last month
-    timeline_menu.add_command(label="last month", command=None)
-    # last year
-    timeline_menu.add_command(label="last year", command=None)
 
 
 # Open Frame with the elevation Graph
@@ -210,28 +183,14 @@ def elevation_click():
 
 
 def calories_click():
-    graph1 = Toplevel()
-    graph1.title("Calories Graph")
-    graph1.configure(background='white')
-    canvas = FigureCanvasTkAgg(Visualization.calories_graph(), graph1)
-    canvas._tkcanvas.grid(row=1, column=1)
-    menubar = Menu(graph1)
-    graph1.config(menu=menubar)
-    filemenu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="File", menu=filemenu)
+    fig = Visualization.calories_graph("no limit")[1]
+    open_graph(fig, "calories")
+
+
     # In einem Standardpfad speichern
     filemenu.add_command(label="Save", command=standard_save_calories)
     # Speichern unter festgelegtem Namen und Pfad
     filemenu.add_command(label="Save as", command=save_calories_click)
-
-    timeline_menu = Menu(menubar, tearoff=0)
-    menubar.add_cascade(label="Timeline", menu=timeline_menu)
-    # last 7 days
-    timeline_menu.add_command(label="last week", command=None)
-    # last month
-    timeline_menu.add_command(label="last month", command=None)
-    # last year
-    timeline_menu.add_command(label="last year", command=None)
 
 
 def activities_click():
