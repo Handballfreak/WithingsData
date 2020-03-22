@@ -61,10 +61,6 @@ for i in range(1, len(split_first_line)):
 def set_data():
     def choose_zip():
         choose_path = filedialog.askopenfilename(filetypes=[("all files","*")])
-        print(choose_path)
-        for filename in os.listdir(Datei_Import.get_vorlage_pfad()):
-            if ".csv" in filename:
-                os.remove(Datei_Import.get_vorlage_pfad()+filename)
         with zipfile.ZipFile(choose_path, 'r') as zfile:
             zfile.extractall(Datei_Import.get_vorlage_pfad())
         Tk().withdraw()
