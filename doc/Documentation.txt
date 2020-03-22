@@ -11,4 +11,11 @@ Ki User Eingabe prüfen
 
 
 3 häufigsten Orte bestimmen und auf Karte anzeigen
-
+Heatmap Karte
+Sportarten einzeln verlauf analyse
+Unit tests
+Docker
+Data version control
+Schlaf Verhalten
+Gewicht Fett Wasser Muskeln usw.
+Herzfrequenz
