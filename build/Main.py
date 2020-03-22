@@ -295,7 +295,7 @@ def predict_step_click():
 frame = Tk()
 frame.title("Withings Data Analyse Tool")
 frame.geometry("600x600")
-frame.configure(background='blue')
+frame.configure(background='#76EEC6')
 
 # button to produce distance graph
 button_distance = Button(frame, text="distance graph", command=distance_click, height=5, width=20)
