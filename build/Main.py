@@ -5,7 +5,11 @@ import Visualization
 import KI_algorithmen
 from tkinter import *
 from tkinter import filedialog
+from tkinter.messagebox import showerror
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import os
+import zipfile
+from datetime import date
 
 read_path = Datei_Import.get_vorlage_pfad()
 
@@ -13,7 +17,7 @@ read_path = Datei_Import.get_vorlage_pfad()
 # user32 = ctypes.windll.user32
 # screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 # print(screensize)
-from datetime import date
+
 
 
 # def get_standard_path_save():
@@ -40,10 +44,7 @@ standard_path_save += split_first_line[0] + ":"
 for i in range(1, len(split_first_line)):
     standard_path_save += split_first_line[i]
 
-activities, calories_earned, calories_passive, distance, elevation, steps, sleep, \
-raw_altitude, raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, \
-raw_horizontal_radius, raw_hr, raw_lap_pool, raw_latitude, raw_longtitude, \
-raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
+
 
 
 # print(Datei_Import.get_walking(activities))
@@ -57,6 +58,33 @@ raw_sleep_state, raw_steps, raw_vertical_radius = Datei_Import.get_dataframe()
 # print(time)
 # Visualization.activities_pie()
 
+def set_data():
+    def choose_zip():
+        choose_path = filedialog.askopenfilename(filetypes=[("all files","*")])
+        print(choose_path)
+        for filename in os.listdir(Datei_Import.get_vorlage_pfad()):
+            if ".csv" in filename:
+                os.remove(Datei_Import.get_vorlage_pfad()+filename)
+        with zipfile.ZipFile(choose_path, 'r') as zfile:
+            zfile.extractall(Datei_Import.get_vorlage_pfad())
+        Tk().withdraw()
+        showerror(title="Attention", message="Please restart Programm")
+
+
+    graph1 = Toplevel()
+    graph1.title("Set Data")
+    graph1.configure(background='white')
+    T = Text(graph1, height=6, width=80)
+    T.pack()
+    rules = """
+                Import the data from your Withings profile
+        Download here: https://account.withings.com/export/my_data
+        After that you will get a link per mail to download the data as csv
+        """
+    T.insert(END, rules)
+    T.config(state=DISABLED)
+    button_choose = Button(graph1, text="choose", command=choose_zip)
+    button_choose.pack()
 
 def save_steps_click():
     frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
@@ -282,4 +310,8 @@ button_prediction_step.grid(row=0, column=1)
 button_standard_save = Button(frame, text="Set Standard Save-Directory", command=set_standard_save_path, height=5,
                               width=20)
 button_standard_save.grid(row=0, column=2)
+
+# button new data
+button_standard_save = Button(frame, text="Set new Dataset", command=set_data, height=5, width=20)
+button_standard_save.grid(row=1, column=2)
 frame.mainloop()

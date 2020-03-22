@@ -197,7 +197,6 @@ def elevation_graph(timerange):
         return False, None
 
 
-
 def save_elevation_graph(path):
     elevation_graph()
     plt.savefig(path)
@@ -237,7 +236,6 @@ def calories_graph(timerange):
         return True, fig
     else:
         return False, None
-
 
 
 def save_calories_graph(path):
