@@ -175,7 +175,6 @@ def distance_graph(timerange):
         return False, None
 
 
-
 def elevation_graph(timerange):
     sns.set_context("notebook")
     sns.set_style("darkgrid")
@@ -231,7 +230,6 @@ def calories_graph(timerange):
         return True, fig
     else:
         return False, None
-
 
 
 def save_calories_graph(path):

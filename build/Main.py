@@ -13,11 +13,11 @@ from datetime import date
 
 read_path = Datei_Import.get_vorlage_pfad()
 
+
 # import ctypes
 # user32 = ctypes.windll.user32
 # screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 # print(screensize)
-
 
 
 # def get_standard_path_save():
@@ -45,8 +45,6 @@ for i in range(1, len(split_first_line)):
     standard_path_save += split_first_line[i]
 
 
-
-
 # print(Datei_Import.get_walking(activities))
 # print(Datei_Import.get_rowing(activities))
 # print(Datei_Import.get_gym(activities))
@@ -60,12 +58,11 @@ for i in range(1, len(split_first_line)):
 
 def set_data():
     def choose_zip():
-        choose_path = filedialog.askopenfilename(filetypes=[("all files","*")])
+        choose_path = filedialog.askopenfilename(filetypes=[("all files", "*")])
         with zipfile.ZipFile(choose_path, 'r') as zfile:
             zfile.extractall(Datei_Import.get_vorlage_pfad())
         Tk().withdraw()
         showerror(title="Attention", message="Please restart Programm")
-
 
     graph1 = Toplevel()
     graph1.title("Set Data")
@@ -82,10 +79,12 @@ def set_data():
     button_choose = Button(graph1, text="choose", command=choose_zip)
     button_choose.pack()
 
+
 def standard_save(data):
     print(standard_path_save)
     timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
     Visualization.save_graph(standard_path_save + "\\" + data + timestamp + ".png")
+
 
 def save_click():
     frame.filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
@@ -116,12 +115,10 @@ def steps_click():
     open_graph(fig, "steps")
 
 
-
 # Open Frame with the elevation Graph
 def elevation_click():
     fig = Visualization.elevation_graph("no limit")[1]
     open_graph(fig, "elevation")
-
 
 
 def calories_click():
@@ -140,7 +137,6 @@ def open_graph(fig, data):
     filemenu = Menu(menubar, tearoff=0)
     menubar.add_cascade(label="File", menu=filemenu)
 
-
     # In einem Standardpfad speichern
     filemenu.add_command(label="Save", command=lambda: standard_save(data))
     # Speichern unter festgelegtem Namen und Pfad
@@ -150,10 +146,10 @@ def open_graph(fig, data):
     menubar.add_cascade(label="Timeline", menu=timeline_menu)
 
     # last 7 days
-    timeline_menu.add_command(label="last week", command= lambda: timeline_click(data, "last week"))
+    timeline_menu.add_command(label="last week", command=lambda: timeline_click(data, "last week"))
     # last month
     timeline_menu.add_command(label="last month", command=lambda: timeline_click(data, "last month"))
-    #last year
+    # last year
     timeline_menu.add_command(label="last year", command=lambda: timeline_click(data, "last year"))
 
 
@@ -169,7 +165,6 @@ def timeline_click(data, timerange):
         no_error, fig = Visualization.calories_graph(timerange)
     if no_error:
         open_graph(fig, data)
-
 
 
 def activities_click():
@@ -225,7 +220,7 @@ def predict_step_click():
     Entry_Steps.pack()
     button_predict = Button(graph1, text="predict", command=predict_KI_steps)
     button_predict.pack()
-    label_Note = Label(graph1, text="", bg = "white")
+    label_Note = Label(graph1, text="", bg="white")
     label_Note.pack()
 
 
