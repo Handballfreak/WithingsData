@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from datetime import date, datetime
 from sklearn.linear_model import LinearRegression
-import dvc.api as datavc
+
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
 raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \

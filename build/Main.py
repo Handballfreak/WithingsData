@@ -10,7 +10,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import os
 import zipfile
 from datetime import date
-import dvc.api as datavc
+
 
 read_path = Datei_Import.get_vorlage_pfad()
 

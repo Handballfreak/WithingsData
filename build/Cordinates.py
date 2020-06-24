@@ -1,7 +1,7 @@
 import Datei_Import
 from matplotlib import pyplot as plt
 from ipyleaflet import Map
-import dvc.api as datavc
+
 
 activities, calories_earned, calories_passive, distance, elevation, steps, sleep, raw_altitude, \
 raw_calories_earned, raw_distance, raw_elevation, raw_gps_speed, raw_horizontal_radius, raw_hr, \
